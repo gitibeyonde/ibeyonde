@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Mjpeg Vs Mp4</title>
+	<meta name="description" content="We will compare Mjpeg Vs Mp4 against key performance params and also look at ways to stream these two diff formats to major browsers.">
+    <meta property="og:description" content="We will compare Mjpeg Vs Mp4 against key performance params and also look at ways to stream these two diff formats to major browsers.">
+	<meta property="og:type" content="website" />
+	<meta name="og:title" property="og:title" content=" Mjpeg Vs Mp4">
+	<meta property="og:image" content="https://ibeyonde.com/img/mjpeg-h264.png" /> 
+     
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" href="/img/favicon.ico" type="image/png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+  </head>
+
+<body>
+ 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+        <div class="container"><a class="navbar-brand text-info font-weight-bold" href="index.html"> ibeyonde </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item text-muted"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="iaas-cloud-ai-ml-india">Services</a></li>
+              <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+  <!--================ Hero sm Banner start =================-->      
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+                <img src="img/mjpeg-h264.png"  width="100%">
+            </div>
+            <div class="col-md-8" style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush;text-align: center;">
+              <div class="hero-banner--sm__content">
+               <h1  style="color: #d73364;">IoT: Mjpeg Vs Mp4</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Mjpeg Vs Mp4</li>
+                  </ol>
+                </nav>
+              </div>
+         </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->
+
+<div class="container">
+
+<br/>
+<br/>
+<br/>
+<br/>
+<h1>Mjpeg Vs Mp4 Video Formats</h1>
+<br/>
+ We will compare Mjpeg Vs Mp4 against key performance params and also look at ways to stream these two diff formats to major browsers.
+<a href="raspberry-pi-security-camera">DIY raspberry pi cloud security camera</a> allows you to choose between H264 compressed Mp4 video or Mjpeg.
+<br/>
+<br/>
+<h2>Network and Delivery</h2>
+<br/>
+H264 is a standard compression format for HD videos. Mp4 is the <a href="https://en.wikipedia.org/wiki/HTML5_video#Browser_support">most supported container format</a> 
+that is compatible with most of the popular browsers. So H264 contained in Mp4 container can be viewed in almost any browser and gives you good quality audio and video.  
+To create an H264 video, you need to encode the camera inputs for some duration.
+
+In case you use it for your surveillance camera then you need reasonably good bandwidth. If bandwidth is terrible and you lose a part of such encoded video you lose all of 
+the videos for that duration. There will also be a slight lag in surveillance feed for the period that the camera uses for encoding and some more if there is buffering to 
+show you smooth security camera video.
+
+A mjpeg video, on the other hand, is a sequence of packed images. A drop in the frame does not affect the subsequent images. The video feels as if it has small jerks in it. 
+Overall the image quality is better. This kind of stream works with low bandwidth. You cannot add audio to Mjpeg. The lag is almost negligible in surveillance cameras as 
+it need not wait to encode subsequent images.
+
+[su_highlight background="#fbfdc7"]H264 Vs Mjpeg Network Quality: Mjpeg wins here due to low latency and low bandwidth requirement.[/su_highlight]
+
+&nbsp;
+<br/>
+<br/>
+<h2>Viewing quality</h2>
+<br/>
+H264 gives you a smooth and crisp video. On the other hand, Mjpeg gives you a jerking video. 
+One major issue with H264 is that when there is movement in the camera view, the size of the H264 chunk increases; sometimes, 
+if bandwidth is not suitable, you may miss out on the period that was of interest. 
+This issue is not there with Mjpeg videos where each chunk(image) is rough of the same size.
+
+Mjpeg works in most of the major browsers across various devices. H264 videos though not as compatible as Mjpeg, also work with major browsers. 
+Many mobile devices like the iPhone and Android cannot play video in the browser window but take up full screen to play them.  
+So on compatibility with devices,  both Mp4 and Mjpeg are roughly on the same grounds. Mp4 videos can be augmented with sound to give you better surveillance data than Mp4.
+
+[su_highlight background="#fbfdc7"]H264 Vs Mjpeg Viewing Quality: Mp4 video with possible augmentation of sound wins here as it gives you the best viewing experience.
+[/su_highlight]
+
+&nbsp;
+<br/>
+<br/>
+<h2>Convenience</h2>
+<br/>
+For viewing, if you have a great bandwidth MP4 is very nice. The motion history is stored in the cloud in forms of Mp4 chunks. Mjpeg history is stored as images. 
+Some may find going thru image history more convenient. On the other hand, video history will not leave out any movement.
+
+[su_highlight background="#fbfdc7"]H264 Vs Mjpeg Convenience: Tie.[/su_highlight]
+
+<br/>
+<br/>
+<h2>A bit of Tech</h2>
+<br/>
+<h3>Mjpeg</h3>
+<br/>
+To display mjpeg in most of the major browsers, all you need is multipart image data flowing into the src of an HTML &lt;img tag. 
+For example, on the HTML side, it appears like:
+<h4>HTML</h4>
+<pre>&lt;?php
+....
+$url = "https://192.168.1.1/udp/live.php?uuid=".$device-&gt;uuid."&amp;rand=".mt_rand();
+$img = '&lt;img<span class="Apple-converted-space">  </span>width="100%"  id="live'.$uuid.'" src="'.$url.'"&gt;';
+....
+?&gt;
+</pre>
+<h4>PHP</h4>
+On the server-side live.php should be writing a multipart image data like below:
+<pre>&lt;?php
+<span class="Apple-converted-space">        </span>header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+<span class="Apple-converted-space">        </span>header("Pragma: no-cache");
+<span class="Apple-converted-space">        </span>header("Cache-Control: no-cache");
+<span class="Apple-converted-space">        </span>header("Cache-Control: no-store");
+<span class="Apple-converted-space">        </span>header('Content-Type: multipart/x-mixed-replace; boundary=--jpgboundary');
+<span class="Apple-converted-space">        </span>print("--jpgboundary\n");
+
+// looping while writing live images, assume $img fetches the live data
+....
+<span class="Apple-converted-space">        </span>print("Content-Type: image/jpeg\n");
+<span class="Apple-converted-space">        </span>$imgsize = strlen($img);
+<span class="Apple-converted-space">        </span>print("Content-length: ". $imgsize . "\n\n" );
+<span class="Apple-converted-space">        </span>print $img;
+<span class="Apple-converted-space">        </span>print("--jpgboundary\n");
+<span class="Apple-converted-space">        </span>flush();
+
+....
+&gt;?
+</pre>
+Some browsers can only handle up to a certain size of this infinitely loading image. These need to be handled by carefully refreshing the image URL at regular intervals etc.
+
+&nbsp;
+<h3>Mp4</h3>
+Mp4 handling is a bit trickier. You are getting mp4 chunks. So you need to keep the mp4 player updated with the latest mp4 snippet. 
+Playing of such Mp4 fragments can be achieved by a bit of javascript.
+
+Create a rest API that indicates the latest mp4 chunk received by the server. Define two video tags; we used <a href="https://videojs.com">videojs</a> as a wrapper:
+<h4>HTML</h4>
+<pre> &lt;\video id="video0" class="video-js vjs-default-skin vjs-4-3" 
+            style="display: block;" preload="auto" muted="" width="100%" height="500"&gt; 
+            autoplay controls &gt;
+&lt;/\video&gt;
+&lt;\video id="video1" class="video-js vjs-default-skin vjs-4-3" 
+            style="display: block;" preload="auto" muted="" width="100%" height="500"&gt; 
+            autoplay controls &gt;
+&lt;/\video&gt;
+</pre>
+<h4>Javascript</h4>
+Using javascript, the idea is while playing one video container, you load and keep the hidden one ready. 
+The loaded one is played as soon as the current one ends, as shown below:
+<pre>var player =  videojs("video0"); 
+var player_hidden =  videojs("video1");
+player_hidden.hide();
+player.show();
+
+player.on('play', function(){
+  player_hidden.src(dynamicMedia() ); 
+  player_hidden.load();
+});
+player_hidden.on('play', function(){
+    player.src(dynamicMedia() ); 
+    player.load();
+});
+player.on('ended', function(){
+     player.hide();
+     player_hidden.show();
+     player_hidden.play();
+ });
+player_hidden.on('ended', function(){
+    player_hidden.hide();
+    player.show();
+    player.play();
+});
+
+player.on('error', function(){
+     player_hidden.hide();
+     player.show();
+     player.src(dynamicMedia());  
+     player.load(); 
+     player.play();
+ });
+
+player_hidden.on('error', function(){
+     player.hide();
+     player_hidden.show();
+     player_hidden.src(dynamicMedia() ); 
+     player_hidden.load(); 
+     player_hidden.play();
+ });
+
+</pre>
+<br/>
+<br/>
+<h2>A side by side recording of the two formats</h2>
+<br/>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UhvGJYZroC8" frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br/>
+In the above video, we have captured the Mp4 video on the left-hand side, while on the right hand is Mjpeg streaming.
+<br/>
+<br/>
+
+You can set a cloud security camera using our DIY kits.
+<br/>
+<br/>
+<h2>About DIY Raspberry Pi Cloud Security Camera</h2>
+<br/>
+<a href="raspberry-pi-security-camera">DIY Raspberry Pi Cloud Security Camera</a> provides storage support for both formats. 
+It is easier to scroll or play the Mjpeg motion alerts, while to drill down H264 history, you need to play the chunk.
+<a href="raspberry-pi-security-camera">DIY Raspberry Pi Cloud Security Camera</a> 
+specializes in delivering surveillance data that can be accessed from major browsers on any device via the cloud. 
+We also provide video AI that can be switched on from your cloud account. 
+Cloud AI enables the camera to interpret events and alerts you as required.
+
+  </div>
+
+
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<br/>
+<br/>
+
+  <!-- ================ start footer Area ================= -->
+    <footer class="bg-dark footer-area section-gap">
+         <div class="container">
+            <div class="footer-bottom row align-items-center text-center text-lg-left">
+                <p class="footer-text text-info m-0 col-lg-4 col-md-12">
+                ibeyonde copyright &copy;2021
+                </p>
+                
+                <div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+                    <a href="terms&conditions.html">Terms</a>&emsp;& &emsp;
+                    <a href="privacy_policy.html">Privacy</a>
+                </div>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="https://twitter.com/agneya2001"><i class="icon-box ti-twitter-alt"></i></a>
+                    <a href="https://fb.me/ibeyonde"><i class="icon-box ti-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/ibeyonde-cloud/"><i class="icon-box ti-linkedin"></i></a>
+                    <a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- ================ End footer Area ================= -->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <!-- JavaScript and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>

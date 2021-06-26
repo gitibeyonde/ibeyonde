@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Threat Modelling</title>
+    <meta name="description" content="The Threat Modelling blog covers Penetration testing, CVEs in third-party software, Channel and Data Security. Take a look at some essential tools and techniques to secure your web property.>
+    <meta property="og:description" content="The Threat Modelling blog covers Penetration testing, CVEs in third-party software, Channel and Data Security. Take a look at some essential tools and techniques to secure your web property.">
+    <meta property="og:type" content="website" />
+    <meta name="og:title" property="og:title" content="Threat Modelling"> 
+    <meta property="og:image" content="https://ibeyonde.com/img/threat-modelling.png" /> 
+     
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" href="/img/favicon.ico" type="image/png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+  </head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+<body>
+ 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+        <div class="container"><a class="navbar-brand text-info font-weight-bold" href="index.html"> ibeyonde </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item text-muted"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="iaas-cloud-ai-ml-india">Services</a></li>
+              <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+  <!--================ Hero sm Banner start =================-->      
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+                <img src="img/threat-modelling.png"  width="100%">
+            </div>
+            <div class="col-md-8" style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush;text-align: center;">
+              <div class="hero-banner--sm__content">
+               <h1  style="color: #d73364;">Threat Modelling</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Threat Modelling</li>
+                  </ol>
+                </nav>
+              </div>
+         </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->
+
+<div class="container">
+
+<br/>
+<br/>
+<br/>
+<h2>Introduction</h2>
+<br/>
+<p>A transactional website that is open to everyone should be able to protect its assets against malicious intents. 
+An insecure website has the potential to compromise the user data on the one hand, and on the other, its services can be disrupted, 
+both of which will result in loss of business. There are industry standards for security that must be adhered to. 
+These are time-tested methodologies and protocols that should be incorporated in the design to provide services and functions on the world wide web. 
+We will look at some of the security standards and acceptable practices in this blog. In the later part of the blog, 
+we will look at methodologies to test and certify if your website can ward of threats emanating from external and internal actors.
+<p>
+<br/>
+<h2>Domain URL</h2>
+<p>
+We will start with something very trivial, i.e., the domain name URL of your hosted service. 
+For one, you should enable encryption on your domain and forward any non-HTTP requests to HTTPS. 
+If you are using apache for serving the URLs, then configure it using <a href="https://www.tecmint.com/redirect-http-to-https-on-apache/" target="_blank">REWRITE module</a>. 
+The use of HTTPS ensures data passes securely over the Internet.
+</p>
+<p>
+Another issue that everyone faces while hosting is whether you should be using "www" before your domain or not. 
+If your server is serving both the URLs with "www" and without them, it will confuse the crawlers who will end up indexing your content twice, 
+probably resulting in a lower rating of your content. REWRITE module comes in hand here, too, 
+if you are running apache. In case you are using hosted services probably this is already configured correctly, and you can move on.
+<a href="https://www.digitalocean.com/community/tutorials/how-to-redirect-www-to-non-www-with-apache-on-ubuntu-14-04" target="_blank">REWRITE module comes in hand here too</a> 
+if you are running apache. In case you are using hosted services probably this is already configured correctly, and you can move on.
+</p>
+<br/>
+<h2>Security Standards</h2>
+<br/>
+<h3>Authentication</h3>
+<p>
+The transactional elements of your website should be password protected. There are straightforward ways to validate complex enough passwords that are not easy to hack. 
+Given the complexities of web applications where they have to interact with third-party services, maintain session info, etc., there are industry-standard authentication schemes like
+<a href="https://oauth.net/2/">OAuth</a>. 
+Password should be stored using one-way hash SHA-256(or other one-way strong encryption) in DB. 
+OAuth 2.0 focuses on client simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and living room devices. 
+For websites that deal with money or critical user information should secure their website using 2-factor authentication, ie, by validating the user email or phone number using OTPs. 
+Two-factor authentication (2FA) is a security process that increases the likelihood that a person is who they say they are. 
+The process requests users to provide two different authentication factors before accessing an application or system, rather than merely their username and password.
+</p>
+<br/>
+<h3>Authorization</h3>
+<p>
+Authorization is the mechanism by which a system determines what level of access a particular authenticated user should have to secured resources controlled by the system.
+<ul>
+<li>
+The first line of defense is to secure the file system. 
+The various files and directories should be given appropriate permissions so that the software you are running has the proper access. 
+The right file permissions effectively create a sandbox for all the users of your system that access it via the web, for example.
+</li>
+<li>
+The second line of defense is to secure the network. This means the ability to blacklisting malicious ips, preventing DDoS attacks, and getting easy access to ports running critical services. 
+If you are hosting on the cloud, like many of us do these days, you need to setup firewall and access policies.
+</li>
+<li>
+The application-level design should permit role-based access to the services and data. The design should be flexible enough to be able to assign specific roles to a user. 
+Mapping is, in general, used to map roles to resource and user to roles.
+</li>
+<li>
+CSRF(cross-site request forgery ) is an attack that tricks an end-user into executing unwanted actions on a web application in which they're currently authenticated. 
+A CSRF is engineered by sending a link in email or on social media. Thus, a user can be tricked to change his account's state or, much worse, trick him into transferring funds. 
+If the victim is an administrative account, CSRF can compromise the entire web application. The Open Web Application Security Project®  
+(<a href="https://owasp.org" target="_blank">OWASP</a>) provides tools to find and mitigate such dangers.
+</li>
+</ul>
+<br/>
+<h3>XSS and Misc Vulnerabilities</h3>
+<br/>
+<p>
+Cross-site scripting (XSS) is a type of security vulnerability typically found in web applications. 
+XSS attacks enable attackers to inject client-side scripts into web pages viewed by other users. 
+Attackers may use a cross-site scripting vulnerability to bypass access controls such as the same-origin policy. 
+XSS effects vary in range from a petty nuisance to a significant security risk, depending on the sensitivity of the vulnerable site's data and 
+the nature of any security mitigation implemented by the site's owner network. 
+Many such vulnerabilities can be found out by automated penetration testing like the one provided by the OWASP ZAP security tool. 
+The OWASP ZAP security tool is a proxy that performs penetration testing against your live application at runtime. 
+It's a popular (over 4k stars) free, open-source project hosted on GitHub. 
+<br>
+<div class="row">
+ <div class="col-md-6" style="padding: 10px; box-shadow: 2px 2px 10px lightblue;">
+ <img class="img-fluid" src="img/owasp-zed-attack-proxy.png"> 
+ </div>
+ <div class="col-md-6" style="padding: 10px; box-shadow: 2px 2px 10px lightblue;">
+ <img  class="img-fluid" src="img/penetration-test-result.png">
+ </div>
+</div>
+<h6>Figures showing a penetration test and report.</h6>
+<p>
+Several online tools can also assist in scanning various aspects of your website. 
+As shown in the following screenshots, it especially scans the headers that are part of the HTTP protocol.
+<div class="row">
+ <div class="col-md-6" style="padding: 10px; box-shadow: 2px 2px 10px lightblue;">
+ <img class="img-fluid" src="img/security-policy.png"> 
+ </div>
+ <div class="col-md-6" style="padding: 10px; box-shadow: 2px 2px 10px lightblue;">
+ <img  class="img-fluid" src="img/security-policy-violation.png">
+ </div>
+</div>
+<br/>
+<h4>Backdoors in third party software</h4>
+<p>
+Most of the software that you develop in general depends on many third-party packages. These packages provide functionalities for data access, 
+connection pooling, logging, networking tools, and the like.
+These are prone to defects too, any vulnerabilities found on such open-source packages are published regularly as <a href="https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures" target="_blank">CVEs</a>.
+You need to be aware of such vulnerabilities and review these in case some of them can affect the security of your product. It is part automated and part manual process.
+</p>
+<p>
+The Snyk tool can automatically detect known CVEs in your dependencies and categorize them according to the harm they can cause. 
+ It is your responsibility to update to the version that fixes
+such exposures. 
+</p>
+<div class="row">
+ <div class="col-md-6" style="padding: 10px; box-shadow: 2px 2px 10px lightblue;">
+ <img class="img-fluid" src="img/synk.png"> 
+ </div>
+ <div class="col-md-6" style="padding: 10px; box-shadow: 2px 2px 10px lightblue;">
+ <img  class="img-fluid" src="img/synk-test.png">
+ </div>
+</div>
+<h6> Figure showing Snynk</h6>
+<br/>
+<h3>Secure Database</h3>
+<p>
+A backend database is part of most web applications. It could be relational-data stored in a database like MySql or unstructured data being dumped into a NoSql database like MongoDB. 
+Some of this data is critical information, like passwords to access third-party services like email servers, object stores, etc. 
+This vital information should be available on only need to know basis. Programmers and maintainers have easy access to such information, and therefore this data should be encrypted. 
+All industry-standard database provides such encryption. Moreover, TLS(transport layer security) should be configured to protect such data when in transit. 
+Please read the documentation for the database that you use and configure it accordingly.
+</p>
+<p>
+The blog attempts to look at various threats that can affect your web application and result in loss of business. 
+It would be best if you get the web property certified safe against such dangers.
+</p>
+<br/>
+</div>
+
+
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<br/>
+<br/>
+
+  <!-- ================ start footer Area ================= -->
+    <footer class="bg-dark footer-area section-gap">
+         <div class="container">
+            <div class="footer-bottom row align-items-center text-center text-lg-left">
+                <p class="footer-text text-info m-0 col-lg-4 col-md-12">
+                ibeyonde copyright &copy;2021
+                </p>
+                
+                <div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+                    <a href="terms&conditions.html">Terms</a>&emsp;& &emsp;
+                    <a href="privacy_policy.html">Privacy</a>
+                </div>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="https://twitter.com/agneya2001"><i class="icon-box ti-twitter-alt"></i></a>
+                    <a href="https://fb.me/ibeyonde"><i class="icon-box ti-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/ibeyonde-cloud/"><i class="icon-box ti-linkedin"></i></a>
+                    <a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- ================ End footer Area ================= -->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <!-- JavaScript and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>

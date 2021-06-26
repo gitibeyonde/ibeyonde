@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Predictive Maintenance using Machine Learning</title>
+<meta name="description" content="Machine learning is an application of artificial intelligence (AI) that provides systems with the ability to learn and improve without being explicitly programmed. ">
+<meta property="og:description" content="Machine learning is an application of artificial intelligence (AI) that provides systems with the ability to learn and improve without being explicitly programmed. ">
+<meta property="og:type" content="website" />
+<meta name="og:title" property="og:title" content="Predictive Maintenance using Machine Learning">
+<meta property="og:image" content="https://ibeyonde.com/img/tank-maintenance.jpg" /> 
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" href="/img/favicon.ico" type="image/png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+    
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+  </head>
+
+<body>
+ 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+        <div class="container"><a class="navbar-brand text-info font-weight-bold" href="index.html"> ibeyonde </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item text-muted"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="iaas-cloud-ai-ml-india">Services</a></li>
+              <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+  <!--================ Hero sm Banner start =================-->      
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+                <img src="img/tank-maintenance.jpg"  width="100%">
+            </div>
+            <div class="col-md-8" style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush;text-align: center;">
+		      <div class="hero-banner--sm__content">
+		       <h1  style="color: #d73364;">AI/ML: Predictive maintenance using machine Learning</h1>
+		        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+		          <ol class="breadcrumb">
+		            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+		            <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+		            <li class="breadcrumb-item active" aria-current="page">Machine Learning</li>
+		          </ol>
+		        </nav>
+		      </div>
+		 </div>
+	  </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->
+  
+<div class="container">
+Machine Learning comes in handy when you need to figure out if a battle tank is healthy and battle-ready, i.e., using regression analysis for predictive maintenance.
+
+Machine learning is an application of artificial intelligence (AI) that provides systems with the ability to learn and improve without being explicitly programmed. 
+The process of learning begins with looking for patterns in observations or data to make better predictions on new data coming in.
+
+Machine Learning comes in handy when you need to figure out if a battle tank is battle-ready. Battle tanks are considered critical components of modern armies. 
+Since they are used in rough terrains and under hostile environments, it becomes necessary to be able to predict if the tank needs maintenance to prevent break down when in use. Various gauges and meters collect vital data from each of these monstrous machines. To illustrate Machine Learning, we will take into account measurements of Current Life, Oil Pressure, Engine Vibrations, and Coolant Temperature. Multiple such readings are from various MBTs (main battlefield tanks). These were used to create a TensorFlow model that predicts the remaining useful life of the MBT.
+
+In Machine Learning categorizes such problems under Supervised Learning. Supervised learning involves finding a relationship between a set of features to predict the output 
+variable. The output varies in nature; in our case, it is a quantitative measurement of the tank's life expectancy, which makes this a regression problem. 
+The other kind of outputs is categories or labels, like <a href="bfsr-target-type-classification">the classification of doppler signals 
+into four groups</a>. These are, as the name suggests, classification problems.
+<br/>
+<br/>
+<br/>
+<h2 class="blog_subheading">Data description</h2>
+<br/>
+<p class="small_data">Shown below is a snippet of data generated from gauges and meters fitted into the tank:</p>
+
+<div>
+<table cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td rowspan="2" valign="middle">
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>Ser</b></span></p>
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>No.</b></span></p>
+</td>
+<td rowspan="2" valign="middle">
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>Eng Hrs Run</b></span></p>
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>(in Hrs)</b></span></p>
+</td>
+<td rowspan="2" valign="middle">
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>Vibration </b></span></p>
+</td>
+<td rowspan="2" valign="middle">
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>Coolant Temp</b></span></p>
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b> (degreeC)</b></span></p>
+</td>
+<td rowspan="2" valign="middle">
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>Oil Pressure </b></span></p>
+<p align="center"><span style="color: #000000; font-family: Trebuchet MS; font-size: medium;"><b>(in Kg/cmsq)</b></span></p>
+</td>
+</tr>
+<tr>
+<td colspan="5"></td>
+</tr>
+<tr>
+<td valign="middle">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">1</span></p>
+</td>
+<td valign="middle">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">260</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">270</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">60</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">9</span></p>
+</td>
+</tr>
+<tr>
+<td valign="middle">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">2</span></p>
+</td>
+<td valign="middle">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">961</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">428</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">78</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">8.2</span></p>
+</td>
+</tr>
+<tr>
+<td valign="middle">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">3</span></p>
+</td>
+<td valign="middle">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">517</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">287</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">80</span></p>
+</td>
+<td valign="bottom">
+<p align="center"><span style="color: #000000; font-family: Arial; font-size: medium;">8.4</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+As the tank gets older, the engine vibration increases, while on the other hand, the Coolant Temperature and Oil Pressure starts rising. 
+However, there exists no relation between Vibration vs. Oil Pressure/Coolant Temperature. 
+The vibration measured have highs and lows; we will work with the averages. 
+<br/>
+<br/>
+<h2 class="blog_subheading">Tensorflow Implementation</h2>
+<div>Here we will see the <a href="https://www.tensorflow.org">TensorFlow</a> implementation of predictive maintenance using machine learning.</div>
+<div>We have the Engine Run data with various features that we have measured over time and with different tanks. This dataset is used to train a regression model 
+that can predict Engine Life in hours.</div>
+<p class="small_data">This example uses the <a href="https://www.tensorflow.org/api_docs/python/tf/keras"><code>tf.keras</code></a> API, see 
+<a href="https://www.tensorflow.org/guide/keras">this guide</a> for details.</p>
+&nbsp;
+<div>
+<pre class="code_part">import urllib
+import io
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+import logging
+import traceback
+logging.getLogger('tensorflow').setLevel(logging.DEBUG)
+print(tf.__version__)
+</pre>
+<p class="small_data"><span style="color: blue;">1.13.0-rc1</span></p>
+<br/>
+<br/>
+<h3 class="blog_subheading">1. Define the path and the format of the data</h3>
+Declare the columns and their type that you want to use for training, as shown below. Floats variable is defined by [0.].
+<pre class="code_part">COLUMNS=["Ser","EngHrs","Vibration","CoolantTemp","OilPressure"]
+RECORDS_ALL=[[0.0], [0.0], [0.0], [0.0],[0.0]]
+</pre>
+In general, we normalize the data to prevent the so-called vanishing/exploding gradient. In our case, we will skip this as our data is well behaved.
+<br/>
+<br/>
+<h3 class="blog_subheading">2. Define the input_fn function</h3>
+We need an input function that can give us predictors datasets as requested. Below is the overall code to define the function.
+<pre class="code_part">def input_fn(data_file, batch_size, num_epoch=None):
+    # Step 1
+    def parse_csv(value):
+        columns = tf.decode_csv(value, record_defaults=RECORDS_ALL)
+        features = dict(zip(COLUMNS, columns))
+        features.pop('Ser')
+        labels =  features.pop('EngHrs')
+        return features, labels
+    # Extract lines from input files using the Dataset API.
+    dataset = (tf.data.TextLineDataset(data_file) # Read text file
+          .skip(1) # Skip header row
+          .map(parse_csv))
+    dataset = dataset.repeat(num_epoch)
+    dataset = dataset.batch(batch_size)
+    # Step 3
+    iterator = dataset.make_one_shot_iterator()
+    features, labels = iterator.get_next()
+    print("Features %s, Labels %s"%(features, labels))
+    return features, labels
+</pre>
+<p class="semi_subheading">Consume the data: Extract lines from input files using the Dataset API.</p>
+
+<ul class="blog_list">
+    <li>tf.data.TextLineDataset(data_file): This line read the csv file</li>
+    <li>.skip(1) : skip the header</li>
+    <li>.map(parse_csv)): parse the records into the tensorsYou need to define a function to instruct the map object. You can call this function parse_csv.</li>
+</ul>
+<br/>
+<p class="semi_subheading">Import the data: Parse CSV File</p>
+This function parses the CSV file with the method tf.decode_csv that returns the features and the label. Code explained below:
+<ul class="blog_list">
+    <li>tf.decode_csv(value, record_defaults= RECORDS_ALL): the method decode_csv uses the output of the TextLineDataset to read the CSV file. 
+    record_defaults instructs TensorFlow about the type of the columns.</li>
+    <li>dict(zip(_CSV_COLUMNS, columns)): Populate the dictionary with all the columns extracted during this data processing</li>
+    <li>features.pop('EngHrs'): Exclude the target variable from the feature variable and create a label variable</li>
+</ul>
+<br/>
+<p class="semi_subheading">Create the iterator</p>
+Now you are ready for the second step, that is, to create an iterator that returns the elements in the dataset for which we use make_one_shot_iterator.
+<br/>
+<br/>
+<h3 class="blog_subheading">3.Consume the data</h3>
+Code below shows how input_fn can be used to generate data for the estimators. The batch size and number of epoch defines how much data it is going to generate.
+num_epoch: Epoch is the number of times the fill data is taken into account.
+batch_size: Batch size is the number of inputs taken at a time
+output: output is printed as the features in a dictionary and the label as an array.
+<p class="small_data">Following will show the first line of the CSV file. You can try to run this code many times with different batch size.</p>
+
+<pre class="code_part">next_batch = input_fn(df_train, batch_size=1, num_epoch=None)
+with tf.Session() as sess:
+   first_batch = sess.run(next_batch)
+   print(first_batch)
+</pre>
+<p class="small_data"><span style="color: blue;">Features {'Vibration': &lt;tf.Tensor 'IteratorGetNext:2' shape=(?,) dtype=float32&gt;, 
+'CoolantTemp': &lt;tf.Tensor 'IteratorGetNext:0' shape=(?,) dtype=float32&gt;, 'OilPressure': &lt;tf.Tensor 'IteratorGetNext:1' shape=(?,) dtype=float32&gt;}, 
+Labels Tensor("IteratorGetNext:3", shape=(?,), dtype=float32, device=/device:CPU:0)</span></p>
+&nbsp;
+<br/>
+<br/>
+<h2 class="blog_subheading">4. Define the feature column</h2>
+You need to define the numeric columns as follow, and then combine all the variables in a bucket.
+<pre class="code_data">X1=tf.feature_column.numeric_column('Vibration')
+X2=tf.feature_column.numeric_column('CoolantTemp')
+X3=tf.feature_column.numeric_column('OilPressure')
+base_columns = [X1, X2, X3]
+</pre>
+&nbsp;
+<br/>
+<br/>
+<h2 class="blog_subheading">5. Build the model</h2>
+You can train the model with the estimator LinearRegressor. Instead of building a new estimator, we are using a 'Canned Estimator' provided by TensorFlow. 
+We will save the trained model in the 'train' directory.
+<pre class="code_data">model=tf.estimator.LinearRegressor(feature_columns=base_columns, model_dir='train')
+</pre>
+We have skipped customizing the optimizer. Instead, we will use the default. An optimizer comes in handy to quickly get to the optimum value of votes
+(weight in TensorFlow terminology) that each input feature gets in deciding the outcome.
+
+<br/>
+<br/>
+<h2 class="blog_subheading">6. Train the model</h2>
+It is now time to train the model, using a lambda function as the input argument to method train, which provides a way of iteratively going thru the predictors.
+<pre class="code_data">model.train(steps=500, input_fn=lambda: input_fn(df_train, batch_size=128, num_epoch=None))</pre>
+<p class="small_data">num_epoch: Epoch is the number of times all the data is taken into account.
+batch_size: Batch size is the number of inputs received at a time step</p>
+<p class="small_data"><span style="font-family: monospace, serif; white-space: pre-wrap;">num_epoch</span>: Steps is the number of batches considered for training.</p>
+If you run thru the data too many times, the model seems to remember your data, this is called overfitting and is not good. When you have an overfitted model, 
+you will get accurate results for features that match the input features, but results will swing wildly if you use different sets of values.
+ Contrast this with an under a fitted model where the results are not very accurate. The sweet spot is somewhere in between, 
+ and you can hit it intuitively by tuning various estimators parameters.
+
+<br/>
+<br/>
+<h2 class="blog_subheading">7. Evaluate the model</h2>
+Now evaluate the fit of your model by using the data set aside for evaluation:
+<pre class="code_data">results = model.evaluate(steps=None,input_fn=lambda: input_fn(df_eval, batch_size=27, num_epoch=1))
+for key in results:
+    print(" {}, was: {}".format(key, results[key]))</pre>
+<p class="small_data"><span style="color: blue;">average_loss, was: 57064.83984375
+label/mean, was: 453.77777099609375
+loss, was: 3081501.25
+prediction/mean, was: 614.8172607421875
+global_step, was: 2110</span></p>
+
+</div>
+Evaluation lets you check if you get a better model on tuning specific parameters. There is no absolute value of the above parameters that will make it right. 
+While optimising your target should be to minimise the loss.
+<div>
+<br/>
+<h2 class="blog_subheading">8. Prediction</h2>
+The last step is predicting the value of based on the value of the matrices of the features. You can write a dictionary with the values you want to predict. 
+The model has three elements, so you need to provide a value for each. The model will give a prediction for each of them.
+In the code below, you wrote the values of each feature that is contained in the df_predict CSV file.
+You need to write a new input_fn function because there is no label in the dataset. You can use the API from_tensor from the Dataset.
+<pre class="code_data">prediction_input = {
+    'Vibration': [325, 272],
+    'CoolantTemp': [65,75],
+    'OilPressure': [8.2,9.2]
+}
+def test_input_fn():       
+    dataset = tf.data.Dataset.from_tensors(prediction_input)       
+    return dataset     
+pred_results = model.predict(input_fn=test_input_fn)
+for pred in enumerate(pred_results):
+    print("Engine remaining life is %d"%(pred[1]['predictions']))
+</pre>
+<br/>
+<p class="small_data"><span style="color: blue;">Engine life is 611</span></p>
+&nbsp;
+<h2 class="blog_subheading">Summary</h2>
+Find the full code with data <a href="https://s3.amazonaws.com/Supergame/tank_life.tar">here.</a>
+Machine learning is more about understanding the data and the ability to tune various parameters to get a model that has the right fitting.
+
+  </div>
+</div>
+ 
+
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<br/>
+<br/>
+
+  <!-- ================ start footer Area ================= -->
+    <footer class="bg-dark footer-area section-gap">
+         <div class="container">
+            <div class="footer-bottom row align-items-center text-center text-lg-left">
+                <p class="footer-text text-info m-0 col-lg-4 col-md-12">
+                ibeyonde copyright &copy;2021
+                </p>
+                
+                <div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+                    <a href="terms&conditions.html">Terms</a>&emsp;& &emsp;
+                    <a href="privacy_policy.html">Privacy</a>
+                </div>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="https://twitter.com/agneya2001"><i class="icon-box ti-twitter-alt"></i></a>
+                    <a href="https://fb.me/ibeyonde"><i class="icon-box ti-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/ibeyonde-cloud/"><i class="icon-box ti-linkedin"></i></a>
+                    <a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- ================ End footer Area ================= -->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <!-- JavaScript and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>

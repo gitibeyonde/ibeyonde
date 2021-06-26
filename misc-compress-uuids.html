@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Compress UUIDS </title>
+    <meta name="description" content="UUIDS are made of 16 alpha numeric hex characters. Can they be compressed to save space ?">
+    <meta name="og:description" content="UUIDS are made of 16 alpha numeric hex characters. Can they be compressed to save space ?">
+    <meta property="og:type" content="website" />
+    <meta name="og:title" property="og:title" content="Compressing UUIDs"> 
+    <meta property="og:image" content="https://ibeyonde.com/img/misc-uuid.png" /> 
+     
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" href="/img/favicon.ico" type="image/png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+  </head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+<body>
+ 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+        <div class="container"><a class="navbar-brand text-info font-weight-bold" href="index.html"> ibeyonde </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item text-muted"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="iaas-cloud-ai-ml-india">Services</a></li>
+              <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+  <!--================ Hero sm Banner start =================-->      
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+                <img src="img/misc-uuid.png"  width="100%">
+            </div>
+            <div class="col-md-8" style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush;text-align: center;">
+              <div class="hero-banner--sm__content">
+               <h1  style="color: #d73364;">Compress UUIDs</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Compress UUIDs</li>
+                  </ol>
+                </nav>
+              </div>
+         </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->
+
+<div class="container">
+
+<br/>
+<br/>
+<br/>
+<br/>
+<h1>Compress UUIDs</h1>
+<br/>
+<p>Universally unique identifiers, or UUIDS are often used for database primary keys in scenarios where coordination of persistence is either impossible or impractical. 
+A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems. 
+</p>
+<p>
+In its canonical textual representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16) digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters 
+(32 hexadecimal characters and 4 hyphens). For example:
+
+123e4567-e89b-12d3-a456-426614174000
+xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx
+</p>
+
+<p>
+There are situations where you may want to pass a shorter string than 36 chars. I came across one such situation and started looking at compressing the uuid. Most of the compression schemes do not work out of the box.
+So I came up with a UUID specific compression scheme. I needed it in javascript so the coding below is in that language.
+</p>
+ <pre class="brush:javascript">
+
+    function encode(webid){
+           webid = webid.replace(/-/g, '');
+           var str="";
+           for (var i=0;i&lt;webid.length/2;i++){
+               var hex = webid.charAt(i*2) + webid.charAt(i*2+1);
+               str += String.fromCharCode(parseInt(hex, 16));
+           }
+           return btoa(str);
+       }
+           
+       var enc = encode('bacb37d0-a51f-491b-bd68-489c245b8c16');
+
+</pre>
+
+<p>
+The "-" in the UUID string are redundant as they are at specific location as prescribed above. Remove "-" as you can place them later. What remains is a hex numbers and that can be compressed into ascii of half the length.
+Now if you need to print this compress ascii array you have to convert it to printable characters. What better way then encoding it in base64 !
+</p>
+
+ <pre class="brush:javascript">
+
+function decode(enc){
+    var str = atob(enc);
+    var dec="";
+    for (var i=0;i&lt;str.length;i++){
+        dec_str = str.charCodeAt(i).toString(16);
+        if (dec_str.length==1)dec_str = "0" + dec_str;
+        dec+=dec_str;
+
+    }
+    // Add -
+    dec = dec.slice(0,8) + "-" + dec.slice(8, 12) + "-" + dec.slice(12, 16) + "-" + dec.slice(16, 20) + "-" + dec.slice(20));
+    
+    return dec;
+}
+
+var dec = decode(enc);
+
+
+</pre>
+
+<p>
+To decode reverse the process and in the end add "-" at prescribed places.
+
+In above example bacb37d0-a51f-491b-bd68-489c245b8c16 (36 chars)  is compressed to uss30KUfSRu9aEicJFuMFg== (24 chars) !
+</p>
+
+</div>
+
+
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<br/>
+<br/>
+
+  <!-- ================ start footer Area ================= -->
+    <footer class="bg-dark footer-area section-gap">
+         <div class="container">
+            <div class="footer-bottom row align-items-center text-center text-lg-left">
+                <p class="footer-text text-info m-0 col-lg-4 col-md-12">
+                ibeyonde copyright &copy;2021
+                </p>
+                
+                <div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+                    <a href="terms&conditions.html">Terms</a>&emsp;& &emsp;
+                    <a href="privacy_policy.html">Privacy</a>
+                </div>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="https://twitter.com/agneya2001"><i class="icon-box ti-twitter-alt"></i></a>
+                    <a href="https://fb.me/ibeyonde"><i class="icon-box ti-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/ibeyonde-cloud/"><i class="icon-box ti-linkedin"></i></a>
+                    <a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- ================ End footer Area ================= -->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <!-- JavaScript and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>

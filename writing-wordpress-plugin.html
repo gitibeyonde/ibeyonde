@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Writing WordPress Plugin </title>
+    <meta name="description" content=" Writing WordPress Plugin, creating a settings page and shortcode to insert custom javascript in pages.">
+    <meta property="og:description" content=" Writing WordPress Plugin, creating a settings page and shortcode to insert custom javascript in pages.">
+    <meta property="og:type" content="website" />
+    <meta name="og:title" property="og:title" content=" Writing WordPress Plugin"> 
+    <meta property="og:image" content="https://ibeyonde.com/img/wordpress-plugin.png" /> 
+     
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" href="/img/favicon.ico" type="image/png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+  </head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+<body>
+ 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+        <div class="container"><a class="navbar-brand text-info font-weight-bold" href="index.html"> ibeyonde </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item text-muted"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="iaas-cloud-ai-ml-india">Services</a></li>
+              <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+  <!--================ Hero sm Banner start =================-->      
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+                <img class="img-responsive" src="img/wordpress-plugin.png" width="100%">
+            </div>
+            <div class="col-md-8" style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush;text-align: center;">
+              <div class="hero-banner--sm__content">
+               <h1  style="color: #d73364;">Writing WordPress Plugin</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">WordPress Plugin</li>
+                  </ol>
+                </nav>
+              </div>
+         </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->
+
+<div class="container">
+
+<br/>
+<br/>
+<br/>
+<h2>Introduction</h2>
+<p>
+A WordPress plugin lets you add meaningful functionality to your WordPress website. 
+There are thousands of such plugins available in the WordPress plugin directory. 
+On the other hand, if you provide a service that WordPress users can use, then a plugin will easily and elegantly help the user use your service.
+ This blog is for people who wish to write a plugin for a service they want to provide to WordPress users.
+</p>
+<p>
+It is not every day that you have to write a WordPress plugin. Most of us will be writing one or maybe a few WordPress plugins. 
+You wish you get handy material to read through quickly and generate a plugin in a few hours for such stuff.  
+</p>
+<p>
+Before you start, you need to be clear about how the WordPress user will use the WordPress plugin. 
+Most common WordPress plugins fall into one of the following categories:
+</p>
+<ul>
+<li><h4>UI Themes</h4> UI Themes give designers the ability to customize the appearance of built-in IDE UI elements. 
+<a href="https://WordPress.org/plugins/tags/user-interface/" target="_blank">Check out some UI plugins</a>
+</li>
+<li><h4>Custom language support</h4> Custom language support provides basic functionality for working with a particular programming language.
+<a href="https://WordPress.org/plugins/tags/language/" target="_blank">Check out the WordPress language plugins</a>
+</li>
+<li><h4>Framework integration</h4> Framework integration consists of improved code insight features, which are typical for a given framework,
+ as well as the option to use framework-specific functionality directly from the IDE. Sometimes it also includes language support elements for a custom syntax or DSL.
+<a href="https://WordPress.org/plugins/tags/framework/" target="_blank">Check out the framework plugins</a>
+</li>
+<li><h4>Tool integration</h4> Tool integration makes it possible to manipulate third-party tools and components directly from the IDE without switching contexts.
+<a href="https://WordPress.org/plugins/tags/tools/" target="_blank">Check out the tools plugins</a>
+</li>
+<li><h4>User interface add-ons</h4> Plugins in this category apply various changes to the standard user interface of the IDE. 
+Some newly added components are interactive and provide new functionality, while others are limited to visual modifications only. 
+The Random Background plugin may serve as an example.
+<a href="https://WordPress.org/plugins/tags/user-interface-addons//" target="_blank">Check out the user interface add-ons plugins</a>
+</li>
+</ul>
+<p>
+To get started with the plugin you need to be familiar with PHP and should have a WordPress installation to develop and test the plugin. Next you need to figure out the
+plugin slug name. This is like a domain name that uniquely identifies your plugin. Preferably use your domain name or company name. Since there are thousands or other plugins the 
+name you choose should be uniquely able to identify your plugin. This will be reviewed by the WordPress team before they approve your plugin.
+</p>
+<p>
+The plugin methods that you write are going to work in a shared namespace. So it will make sense to append the PHP filenames and methods names with the slug name that you
+choose. You should also go thru the detailed guidelines provided by WordPress 
+<a href="https://developer.WordPress.org/plugins/WordPress-org/detailed-plugin-guidelines/" target="_blank">here.</a>
+</p>
+<br/>
+<h2>Getting Started</h2>
+<p>
+Create a folder in your WordPress installation under wp-content/plugins/ use the chosen slugname (we will assume slugname to be slugname) as the folder name.
+Under this folder wp-content/plugins/slugname, create two files index.php and slugname.php.
+</p>
+
+
+<b>index.php is a place holder and contains the following:</b>
+
+<pre><code>
+&lt;?php
+// Silence is golden.
+</code></pre>
+
+<b>slugname.php contains the plugin details as follows:</b>
+
+<pre><code>
+&lt;?php
+/**
+ * @package Slugname Service
+ * @version 0.0.1
+ * @email: info at ibeyonde.com
+ */
+/*
+Plugin Name: Slugname
+Plugin URI: http://WordPress.org/plugins/slugname/
+Description: A shortcode based WordPress plugin to enable Slugname on the webpage
+Author: Ibeyonde
+Version: 0.0.1
+Author URI: https://ibeyonde.com/
+*/
+
+define( 'SLUGNAME_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+require_once(SLUGNAME_PLUGIN_DIR .'slugname_init.php');
+require_once(SLUGNAME_PLUGIN_DIR .'slugname_settings.php');
+require_once(SLUGNAME_PLUGIN_DIR .'slugname_shortcode.php');
+
+</code></pre>
+<p>
+In slugname.php include plugin details and other plugin files that are part of your plugin code, as shown above. The other files are slugname_init.php, slugname_settings.php and slugname_shortcode.php.
+</p>
+<p>
+slugname_init.php contains code to initialize the plugin, as shown below:
+
+<pre><code>
+&lt;?php
+/**
+ * Slugname initial settings
+ * 
+ * The initial setup for each page.
+ * 
+ */
+function slugname_init() {
+    /**
+    * The options store the values that are initialized by the WordPress user in the plugins settings page. 
+    **/
+    $options = <a href="https://developer.WordPress.org/reference/functions/get_option/" target="_blank">get_option</a>( 'slugname_options' );
+    
+    /**
+    * Use the values in options to initialize local variables
+    **/
+    $field_id = isset($options["slugname_field_id"]) ? $options["slugname_field_id"] : null;
+    
+    /**
+    * If some important setting is missing abort the plugin setup
+    **/
+    //If field_id is not defined donot register the plugin
+    if ($field_id == null){
+        return;
+    }
+    
+    /**
+    * Add javascript files that are required by your plugin. Use "enque"" so that the WordPress engine loads it in an optimized fashion
+    **/
+    
+    <a href="https://developer.WordPress.org/reference/functions/wp_enqueue_script/" target="_blank">wp_enqueue_script</a>('slugname', plugin_dir_url(__FILE__) . 'http://slugname.com/slugname-latest.js', array('jquery'), null, true );
+    
+    $inline_js = '&lt; some javascript that will be added to all the pages &gt; ';
+    
+    <a href="https://developer.WordPress.org/reference/functions/wp_add_inline_script/" target="_blank">wp_add_inline_script</a>('slugname', $inline_js);
+}
+
+/**
+ * Register our slugname_settings_init to the admin_init action hook.
+ */
+<a href="https://developer.WordPress.org/reference/functions/add_action/" target="_blank">add_action</a>( 'init', 'slugname_init' );
+
+</code></pre>
+
+<p>
+Most of  the plugins can do with a settings page. So we start our coding section on how to put the settings page on WordPress plugin.
+A typical settings page, slugname_settings.php, with a input field and a dropdown is shown below:
+</p>
+<pre><code>
+&lt;?php
+/**
+ * Custom settings
+ */
+function slugname_settings_init() {
+    // Register a new setting for "slugname" page.
+    <a href="https://developer.WordPress.org/reference/functions/register_setting/" target="_blank">register_setting</a>( 'slugname', 'slugname_options' );
+    
+    // Register a new section in the "slugname" page.
+    <a href="https://developer.WordPress.org/reference/functions/add_settings_section/" target="_blank">add_settings_section</a>(
+            'slugname_section_developers',
+            __( 'Worlds best wordpress solution.', 'slugname' ), 'slugname_section_developers_callback', 'slugname'
+            );
+    
+    <a href="https://developer.WordPress.org/reference/functions/add_settings_field/" target="_blank">add_settings_field</a>(
+            'slugname_field_id', 
+            // Use $args' label_for to populate the id inside the callback.
+            __( 'Web Id', 'slugname' ),
+            'slugname_field_id_cb',
+            'slugname',
+            'slugname_section_developers',
+            array(
+                    'label_for'         =&gt; 'slugname_field_id',
+                    'class'             =&gt; 'slugname_row_id',
+                    'custom_data'       =&gt; 'slugname_custom_id',
+            )
+            );
+    
+    
+    <a href="https://developer.WordPress.org/reference/functions/add_settings_field/" target="_blank">add_settings_field</a>(
+            'slugname_field_position', 
+            // Use $args' label_for to populate the id inside the callback.
+            __( 'Item Placement', 'slugname' ),
+            'slugname_field_position_cb',
+            'slugname',
+            'slugname_section_developers',
+            array(
+                    'label_for'         =&gt; 'slugname_field_position',
+                    'class'             =&gt; 'slugname_row_position',
+                    'custom_data'       =&gt; 'slugname_custom_position',
+            )
+            );
+}
+
+/**
+ * Register our slugname_settings_init to the admin_init action hook.
+ */
+<a href="https://developer.WordPress.org/reference/functions/add_action/" target="_blank">add_action</a>( 'admin_init', 'slugname_settings_init' );
+
+
+/**
+ * Custom option and settings:
+ *  - callback functions
+ */
+
+/**
+ * Developers section callback function.
+ *
+ * @param array $args  The settings array, defining title, id, callback.
+ */
+function slugname_section_developers_callback( $args ) {
+    ?&gt;
+    &lt;p id="&lt;?php echo esc_attr( $args['id'] ); ?&gt;"&gt;&lt;?php esc_html_e( 'To link the user account, please provide the details below.', 'slugname' ); ?&gt;&lt;/p&gt;
+    &lt;?php
+}
+ 
+/**
+ * Id field callback function.
+ *
+ * @param array $args
+ */
+function slugname_field_id_cb( $args ) {
+    /**
+    * Get the value of the setting that were given before to pre-populate the fields
+    **/
+    $options = <a href="https://developer.WordPress.org/reference/functions/get_option/" target="_blank">get_option</a>( 'slugname_options' );
+    ?&gt;
+    &lt;input type='text' name="slugname_options[&lt;?php echo esc_attr( $args['label_for'] ); ?&gt;]" 
+        id="&lt;?php echo esc_attr( $args['label_for'] ); ?&gt;" 
+        value="&lt;?php echo isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] :  '' ; ?&gt;"
+        placeholdertext="web id" size="100"&gt;
+    &lt;p class="description"&gt;
+        &lt;?php esc_html_e( 'You will get this value from your slugname account\'s WordPress setting.', 'slugname' ); ?&gt;
+    &lt;/p&gt;
+    &lt;?php
+}
+
+
+/**
+ * Poistion field callback function valid values are:
+ *  'top' | 'top-start' | 'top-end' 
+ *
+ * @args
+ */
+function slugname_field_position_cb( $args ) {
+    // Get the value of the setting we've registered with register_setting()
+    $options = get_option( 'slugname_options' );
+    ?&gt;
+    &lt;select
+            id="&lt;?php echo esc_attr( $args['label_for'] ); ?&gt;"
+            data-custom="&lt;?php echo esc_attr( $args['custom_data'] ); ?&gt;"
+            name="slugname_options[&lt;?php echo esc_attr( $args['label_for'] ); ?&gt;]"&gt;
+        &lt;option value="top" &lt;?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'top', false ) ) : ( '' ); ?&gt;&gt;
+            &lt;?php esc_html_e( 'top', 'slugname' ); ?&gt;
+        &lt;/option&gt;
+        &lt;option value="top-start" &lt;?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'top-start', false ) ) : ( '' ); ?&gt;&gt;
+            &lt;?php esc_html_e( 'top-start', 'slugname' ); ?&gt;
+        &lt;/option&gt; 
+        &lt;option value="top-end" &lt;?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'top-end', false ) ) : ( '' ); ?&gt;&gt;
+            &lt;?php esc_html_e( 'top-end', 'slugname' ); ?&gt;
+        &lt;/option&gt;
+    &lt;/select&gt;
+    &lt;p class="description"&gt;
+        &lt;?php esc_html_e( 'Select the position of the Item placement on the webpage.', 'slugname' ); ?&gt;
+    &lt;/p&gt;
+    &lt;?php
+}
+
+/**
+ * Add the top level menu page.
+ */
+function slugname_options_page() {
+    <a href="https://developer.WordPress.org/reference/functions/add_menu_page/" target="_blank">add_menu_page</a>(
+        'Slugname',
+        'Slugname Settings',
+        'manage_options',
+        'Slugname',
+        'slugname_options_page_html'
+    );
+}
+ 
+ 
+/**
+ * Register our slugname_options_page to the admin_menu action hook.
+ */
+<a href="https://developer.WordPress.org/reference/functions/add_action/" target="_blank">add_action</a>( 'admin_menu', 'slugname_options_page' );
+ 
+ 
+/**
+ * Top level menu callback function
+ */
+function slugname_options_page_html() {
+    // check user capabilities
+    if ( ! <a href="https://developer.WordPress.org/reference/functions/current_user_can/" target="_blank">current_user_can</a>( 'manage_options' ) ) {
+        return;
+    }
+ 
+    // add error/update messages
+ 
+    // check if the user has submitted the settings
+    // WordPress will add the "settings-updated" $_GET parameter to the url
+    if ( isset( $_GET['settings-updated'] ) ) {
+        // add settings saved message with the class of "updated"
+        <a href="https://developer.WordPress.org/reference/functions/add_settings_error/" target="_blank">add_settings_error</a>( 'slugname_messages', 'slugname_message', __( 'Settings Saved', 'slugname' ), 'updated' );
+    }
+ 
+    // show error/update messages
+    <a href="https://developer.WordPress.org/reference/functions/settings_errors/" target="_blank">settings_errors</a>( 'slugname_messages' );
+    ?&gt;
+    &lt;div class="wrap"&gt;
+        &lt;h1&gt;&lt;?php echo esc_html( get_admin_page_title() ); ?&gt;&lt;/h1&gt;
+        &lt;form action="options.php" method="post"&gt;
+            &lt;?php
+            // output security fields for the registered setting "slugname"
+            <a href="https://developer.WordPress.org/reference/functions/settings_fields/" target="_blank">settings_fields</a>( 'slugname' );
+            // output setting sections and their fields
+            // (sections are registered for "slugname", each field is registered to a specific section)
+            <a href="https://developer.WordPress.org/reference/functions/do_settings_sections/" target=_blank">do_settings_sections</a>( 'slugname' );
+            // output save settings button
+            <a href="https://developer.WordPress.org/reference/functions/submit_button/" target="_blank">submit_button</a>( 'Save Settings' );
+            ?&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;?php
+}
+
+</code></pre>
+
+
+<p>
+With the init and settings page, you are mostly started. Now comes the plugin-specific part. In this, we will look at how you can use shortcodes. 
+Shortcodes are placeholders that are embedded in the WordPress page using solid braces like [slugname_shortcode id=abc].
+ The method you will define here will substitute these shortcodes with the HTML/javascript/CSS you specify in the shortcode methods.
+</p>
+<p>
+Create a file called slugname_shortcode.php and type as per the code guidelines provided below:
+</p>
+
+<pre><code>
+&lt;?php
+
+// Add the action.
+add_action( 'plugins_loaded', function() {
+    // Add the shortcode.
+    add_shortcode( 'slugname', 'slugname_shortcode' );
+});
+
+/**
+ * This function defines the slugname_shortcode
+ *
+ * @param  Attributes $atts
+ * @return string
+ * @since  1.0.0
+ * 
+ */
+function slugname_shortcode( $atts ) {
+    $options = get_option( 'facee_options' );
+    
+    /**
+    * Get values from shortcode definition [slugname_shortcode id=abc]
+    **/
+    $type = trim(isset($atts["id"]) ? $atts["id"] : null);
+    
+    /**
+    * Do something meaningful like write javascript, html or CSS
+    **/
+    
+    $inline_js = '&lt; some javascript &gt;';
+    <a href="https://developer.WordPress.org/reference/functions/wp_add_inline_script/" target="_blank">wp_add_inline_script</a>('ibeyonde', $inline_js);
+    
+    $_return = "&lt; Some html code &gt;"
+    
+    return $_return;
+}
+</code></pre>
+<p>
+Once you are done coding your WordPress plugin you will also need to do some documentation like writing the license file and readme.txt. For License, this is what WordPress 
+<a href="https://developer.WordPress.org/plugins/plugin-basics/including-a-software-license/" target="_blank">suggests</a>. A sample readme.txt file can be found 
+<a href="https://WordPress.org/plugins/readme.txt" target="_blank">here</a>.
+You can submit your plugin <a href="https://WordPress.org/plugins/developers/add/" target="_blank">here</a>. Learn a bit about SVN <a href="https://www.tutorialspoint.com/svn/svn_quick_guide.htm" target="_blank">here</a>
+, it will come in handy.
+<p>
+The above will mostly set you up and get you ready for writing your own WordPress plugin. You can get in touch with us at info[at]ibeyonde.com if you need further help.
+</p>
+</div>
+
+
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<br/>
+<br/>
+
+  <!-- ================ start footer Area ================= -->
+    <footer class="bg-dark footer-area section-gap">
+         <div class="container">
+            <div class="footer-bottom row align-items-center text-center text-lg-left">
+                <p class="footer-text text-info m-0 col-lg-4 col-md-12">
+                ibeyonde copyright &copy;2021
+                </p>
+                
+                <div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+                    <a href="terms&conditions.html">Terms</a>&emsp;& &emsp;
+                    <a href="privacy_policy.html">Privacy</a>
+                </div>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="https://twitter.com/agneya2001"><i class="icon-box ti-twitter-alt"></i></a>
+                    <a href="https://fb.me/ibeyonde"><i class="icon-box ti-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/ibeyonde-cloud/"><i class="icon-box ti-linkedin"></i></a>
+                    <a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- ================ End footer Area ================= -->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <!-- JavaScript and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>

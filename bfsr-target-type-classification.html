@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>BFSR target type classification using doppler sound</title>
+	<meta name="description" content="The Battle Field Sensing Radar (BFSR) is a fully coherent Pulse-Doppler radar. It works at a meagre peak power of 5W that makes it difficult to detect by enemy sensors. ">
+    <meta property="og:description" content="The Battle Field Sensing Radar (BFSR) is a fully coherent Pulse-Doppler radar. It works at a meagre peak power of 5W that makes it difficult to detect by enemy sensors.">
+	<meta property="og:type" content="website" />
+	<meta name="og:title" property="og:title" content="Classification of radiation emanating from BFSR to determine target type"> 
+	<meta property="og:image" content="https://ibeyonde.com/img/sound-spectograph.png" /> 
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" href="/img/favicon.ico" type="image/png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+  </head>
+
+<body>
+ 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+        <div class="container"><a class="navbar-brand text-info font-weight-bold" href="index.html"> ibeyonde </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item text-muted"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="iaas-cloud-ai-ml-india">Services</a></li>
+              <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+            </ul><!--  <a class="btn btn-primary ml-auto hover-top-shadow" href="#!">Buy now</a>-->
+          </div>
+        </div>
+      </nav>
+
+
+  <!--================ Hero sm Banner start =================-->      
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+                <img src="img/bfsr.jpg" alt="AI/ML Tensorflow India" width="100%">
+            </div>
+            <div class="col-md-8" style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush;text-align: center;">
+              <div class="hero-banner--sm__content">
+               <h1  style="color: #d73364;">Predicting BFSR target type using deep learning</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">BFSR Targets</li>
+                  </ol>
+                </nav>
+              </div>
+         </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->
+<div class="container">
+
+<br/>
+<br/>
+<br/>
+
+<h2>Introduction</h2>
+The Battle Field Sensing Radar (BFSR) is a fully coherent Pulse-Doppler radar. It works at a meagre peak power of 5W that makes it difficult to detect by enemy sensors. 
+The radar operates over 21 channels in J band (10 to 18/20 GHz). It is operable in all weather conditions and during day and night. BFSR is portable and is mountable on vehicles.
+
+Presently, the doppler sounds generated from battlefield sensing radar (<a href="https://en.wikipedia.org/wiki/BEL_Battle_Field_Surveillance_Radar">BFSR</a>) 
+by different targets are manually classified. The human resources that rank these signals are trained over a significant period. Only after rigorous training, 
+they can distinguish the signals generated by various categories of targets. In general, these categories are 1. Crawling man, 2. Group of men, 3. Light vehicle and 
+4. Heavy vehicle.
+
+<br/>
+<br/>
+<br/>
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+	   <img class="img-fluid" src="img/bfsr_stand.jpeg"  alt="AI/ML Tensorflow India"  alt="Spectrograph of doppler sound"/> 
+	</div>
+	<div class="col-md-4">
+	   <br/><br/><br/><br/><br/><br/><br/>
+	   <em>Presenting and handing over the ML based system to MCME.</em>
+	</div>
+</div>
+
+<div class="row">
+<br/>
+<br/>
+<br/>
+<br/>
+</div>
+
+<h2>ML for BFSR target type classification</h2>
+The Doppler sound effects from above four sources are significantly different. We use machine learning algorithms to train a model to be able to detect these differences 
+and reasonably accurately predict the source. We use convoluted neural network (CNN) implementation of TensorFlow, which is open-source software, 
+supported by google to implement algorithms that use neural networks to train models. Current online resources show that TensorFlow is better on several fronts 
+compared to its peers. The research is readily available on the <a href="https://cv-tricks.com/deep-learning-2/tensorflow-or-pytorch/">internet</a>.
+
+The training process consists of collecting the data from different radar setups. Each of such data is collected and sanitised; this involves removing background noises, 
+removing silence and then clipping them to appropriate size. 
+
+<br/>
+<br/>
+<em>Sample code snippet from code that sanitises audio data:</em>
+<br/>
+<br/>
+<pre>
+for i in $(find "${d}" -name "*.wav" -print | sed 's/ /_/g')
+do
+    echo $i
+    b=$(basename $i)
+    echo $b
+    p=$(dirname $i)
+    echo $p
+    mkdir -p "$f/$p"
+
+    sox  $i "$f/$p/${b}.wav" silence 1 0.1 2% -1 0.1 2%
+
+done
+</pre>
+
+<br/>
+<br/>
+<em>Sample code snippet from code that splits audio into aqual size samples:</em>
+<br/>
+<br/>
+<pre>
+
+for i in $(find "${d}" -name "*.wav" -print | sed 's/ /_/g')
+do
+    echo $i
+    b=$(basename $i)
+    echo $b
+    p=$(dirname $i)
+    echo $p
+    mkdir -p "$f/$p"
+
+    ffmpeg -i $i  -f segment -segment_time $n -c copy "$f/$p/${b}_%03d.wav"
+
+done
+
+</pre>
+
+The sanitised wave files are then transformed to spectrograms using fast Fourier transform. 
+
+<pre>
+
+
+def fourierfft(wav_file):
+    sr,data = readwave(wav_file)
+    fft_out = fft(data)
+    plt.plot(data, np.abs(fft_out))
+    plt.savefig(wav_file.split('.wav')[0]+'.png',
+                dpi=100,  # Dots per inch
+                frameon='false',
+                aspect='normal',
+                bbox_inches='tight',
+                pad_inches=0)
+    plt.close()
+    try:
+        im = Image.open(wav_file.split('.wav')[0] + '.png')
+        rgb_im = im.convert('RGB')
+        rgb_im.save(wav_file.split('.png')[0] + '.jpg')
+    except Exception as e:
+        print (e)
+    if os.path.exists(wav_file.split('.wav')[0] + '.png'):
+        os.remove(wav_file.split('.wav')[0] + '.png')
+      
+
+</pre>
+
+The sanitised data is passed to a custom Tensorflow based training process. A significant amount of information is given thru the training module while keeping a 
+small percent for testing. A model and the confusion matrix generated after this process shows how well the training happened.
+<br/>
+<br/>
+
+<div class="row">
+<br/>
+<br/>
+<img class="img-fluid" src="img/sound-spectograph.png" alt="Spectrograph of doppler sound used for Machine Learning, India"  /> 
+<br/>
+<em>Fig 1. Sample FFT generated spectograph of doppler sound spanning 1 second; the first one is from a group of man, second is from a light vehicle.</em>
+</div>
+<br/>
+<br/>
+
+The target types are predicted using the real-time sound captured from the radars audio out. The sanitized data clipped to an appropriate size is then funneled thru ML 
+algorithms. The predictor with the model then classifies the input signal into one of the categories with a confidence value. 
+This value can help tune the sensitivity of the prediction algorithm.
+<br/>
+<br/>
+<h2>ML Phases</h2>
+The diagram below depicts the two phases.
+
+<div class="row">
+<br/>
+<br/>
+<img class="img-fluid" src="img/Logical flow of events for the two phases.png"  alt="Logical flow of events for the two phases in the Machine Learning Process" /> 
+<br/>
+<em>Fig 2, Shows the logical flow of events for the two phases 1. Training and 2. Prediction.</em>
+<br/>
+<br/>
+</div>
+
+With proprietory techniques, we have been able to reduce false positives to less than 1%.
+
+Sample audio files <a href="https://ibeyonde.s3.ap-south-1.amazonaws.com/doppler.tar.gz">download</a>.
+
+For more information do get in <a href="index.html#contact">touch.</a>
+</div>
+
+
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<br/>
+<br/>
+
+  <!-- ================ start footer Area ================= -->
+    <footer class="bg-dark footer-area section-gap">
+         <div class="container">
+            <div class="footer-bottom row align-items-center text-center text-lg-left">
+                <p class="footer-text text-info m-0 col-lg-4 col-md-12">
+                ibeyonde copyright &copy;2021
+                </p>
+                
+                <div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+                    <a href="terms&conditions.html">Terms</a>&emsp;& &emsp;
+                    <a href="privacy_policy.html">Privacy</a>
+                </div>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="https://twitter.com/agneya2001"><i class="icon-box ti-twitter-alt"></i></a>
+                    <a href="https://fb.me/ibeyonde"><i class="icon-box ti-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/ibeyonde-cloud/"><i class="icon-box ti-linkedin"></i></a>
+                    <a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- ================ End footer Area ================= -->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <!-- JavaScript and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>

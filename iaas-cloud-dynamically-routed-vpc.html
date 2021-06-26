@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Iaas cloud india - Dynamically routed VPC</title>
+<meta name="description"  content="The traffic between two VPC from being routed via public network is routed thru private network, thereby, optimizing it.">
+<meta property="og:description"  content="The traffic between two VPC from being routed via public network is routed thru private network, thereby, optimizing it.">
+<meta property="og:type" content="website" />
+<meta name="og:title" property="og:title" content="Iaas cloud india - Dynamically routed VPC">
+<meta property="og:image" content="https://ibeyonde.com/img/ospf-use-case-tn.png" />
+
+<!-- ===============================================-->
+<!--    Favicons-->
+<!-- ===============================================-->
+<link rel="apple-touch-icon" sizes="180x180"
+	href="assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" href="/img/favicon.ico" type="image/png">
+<link rel="manifest" href="assets/img/favicons/manifest.json">
+<link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+<meta name="msapplication-TileImage"
+	content="assets/img/favicons/mstile-150x150.png">
+<meta name="theme-color" content="#ffffff">
+
+
+<!-- ===============================================-->
+<!--    Stylesheets-->
+<!-- ===============================================-->
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap"
+	rel="stylesheet">
+<link href="assets/css/theme.css" rel="stylesheet">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+</head>
+
+<body>
+
+	<!-- ===============================================-->
+	<!--    Main Content-->
+	<!-- ===============================================-->
+	<main class="main">
+	<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+		<div class="container">
+			<a class="navbar-brand text-info font-weight-bold"
+				href="index.html"> ibeyonde </a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item text-muted"><a class="nav-link"
+						aria-current="page" href="index.html">Home</a></li>
+					
+					<li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="iaas-cloud-ai-ml-india">Services</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="blog.html">Blog</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<!--================ Hero sm Banner start =================-->
+	<section class="hero-banner hero-banner--sm mb-30px">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4"
+					style="padding: 1vh; box-shadow: 2px 2px 10px lightblue; text-align: center;">
+					<img src="img/ospf-use-case-tn.png" width="100%">
+				</div>
+				<div class="col-md-8"
+					style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush; text-align: center;">
+					<div class="hero-banner--sm__content">
+						<h2 style="color: #d73364;">Dynamically routed VPC</h2>
+						<nav aria-label="breadcrumb" class="banner-breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item"><a href="iaas-cloud-india">Cloud</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Apache Cloudstack</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ Hero sm Banner end =================-->
+	<div class="container">
+
+		<br /> <br /> <br />
+
+		<h2 id="DynamicallyroutedVPC-Introduction">Introduction</h2>
+		<p> Currently, in cloudstack the inter VPC traffic has to go thru the public
+			gateway. This means the traffic has to be nat-ed across public
+			internet via core-routers, which is inefficient in itself. A more
+			efficient approach will be to route the traffic within cloudstack and
+			even better if no NAT-ing is involved.</p>
+		<p>  OSPF provides a way to connect two VPCs using the optimal
+			route between them without needing nat-ing. OSPF achieves this by
+			maintaining and advertising the most efficient routes between various
+			OSPF enabled routers. When a new VPC is added its OSPF enabled router
+			advertises the routes to other routers, thereby each of them learn to
+			route traffic properly between them. </p>
+		<h6
+			id="DynamicallyroutedVPC-ThisdesigndocumentlooksintohowOSPFcanbeimplementedincloudstacktomakeinterVPCcommunicationmoremanageableandefficient."> 
+			     This design document looks into how OSPF can be implemented in
+			cloudstack to make inter VPC communication more manageable and
+			efficient. </h6>
+		<p> </p>
+		<h2 id="DynamicallyroutedVPC-Implementation">Implementation</h2>
+		<p>In this implementation the focus will be on IPv4, though Quagga
+			supports both IPv4 and IPv6 and will not be constrained when in
+			future IPv6 support is added. The firewall, port forwarding, Network
+			ACLs, DNS, DHCP and Password Reset services running on the router
+			will continue to work as they do now on VPC routers.</p>
+		<p>
+			When OSPF is selected for a zone, cloudstack will prompt for
+			additional information in order to configure a inter VPC-Transit
+			network on the existing public network for this zone. <em> For
+				simplicity we will use the existing zone wide public network as
+				VPC-transit network</em>. A VPC VR router sits at the boundary of the VPC
+			tiered network in Area X. This router will advertise its routing
+			table to the other Area X routers including the designated router.
+			These routes are then picked up by other boundary routers. When one
+			of the VPC's VM wants to communicate with another VPC's VM the router
+			now knows how to direct the traffic via the VPC/Transit network(which
+			is also the cloudstack public network).
+		</p>
+		<p>All the VPC VR will be connected to transit network forming
+			OSPF Area X. Cloudstack will auto generate the priorities of these
+			routers that will help them elect a designated router.</p>
+		<p> OSPF will take care of routing the traffic originating from
+			various tiers to another VPCs tiers. So that none of the existing
+			functionality is affected all the other static routes will still be
+			set on quagga based router. (An example of static routes is attached
+			at the end of this doc)</p>
+		<h5
+			id="DynamicallyroutedVPC-Limitation:Inthisfirstimplementation,1.onlyoneOSPFareaperZonewillbesupported,2.theimplementationwillbeforIPv4only.">Limitation:
+			In this first implementation, 1.  only one OSPF area per Zone will be
+			supported, 2. the implementation will be for IPv4 only.</h5>
+		<h2 id="DynamicallyroutedVPC-AboutQuagga">About Quagga</h2>
+		<p>  Quagga implements OSPF (v2, v3) and is found suitable to run
+			on debian based VPC virtual router to provide dynamic routing. Quagga
+			is an advanced software routing package that provides a suite of
+			TCP/IP-based routing protocols and provides implementations of
+			OSPFv2, OSPFv3, RIP v1 and v2, RIPng and BGP-4 for Unix-like
+			platforms, particularly FreeBSD, Linux, Solaris and NetBSD.</p>
+		<p> </p>
+		<p>
+			<img src="img/ospf-use-case-tn.png">
+		</p>
+		<h2 id="DynamicallyroutedVPC-OSPFTransitNetwork">
+			<span style="font-size: 16.0px; font-weight: bold;">OSPF
+				Transit Network</span>
+		</h2>
+		<p>The public network (VPC-Transit network) will be used as
+			transit network for OSPF for all the dynamically routed VPCs in the
+			zone. If dynamic routing is enabled for the the zone additional
+			information will be collected. This information will be stored in
+			network_details table for the given public network.</p>
+		<p>Following additional information is required to enable dynamic
+			routing for a zone:</p>
+		<div class="table-wrap">
+			<table class="confluenceTable">
+				<thead>
+					<tr>
+						<th class="confluenceTh"><div
+								class="tablesorter-header-inner">Field Name</div></th>
+						<th class="confluenceTh"><div
+								class="tablesorter-header-inner">Description</div></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="confluenceTd">Protocol</td>
+						<td class="confluenceTd">Dropdown to select the protocol:
+							OSPF or BGP<span style="color: rgb(255, 0, 0);"><strong> </strong></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd">OSPF Area</td>
+						<td colspan="1" class="confluenceTd">Specify the OSPF Area ID</td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd">Hello Interval</td>
+						<td colspan="1" class="confluenceTd"><span
+							style="color: rgb(0, 0, 0);">Set number of seconds for
+								HelloInterval timer value. Setting this value, Hello packet will
+								be sent every timer value seconds on the specified interface.
+								This value must be the same for all routers attached to a common
+								network. The default value is 10 seconds.</span></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd"><span
+							style="color: rgb(0, 0, 0);">Dead Interval</span></td>
+						<td colspan="1" class="confluenceTd"><span
+							style="color: rgb(0, 0, 0);">Set number of seconds for
+								RouterDeadInterval timer value used for Wait Timer and
+								Inactivity Timer. This value must be the same for all routers
+								attached to a common network. The default value is 40 seconds.</span></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd"><span
+							style="color: rgb(0, 0, 0);">Retransmit Interval</span></td>
+						<td colspan="1" class="confluenceTd"><span
+							style="color: rgb(0, 0, 0);">Set number of seconds for
+								RxmtInterval timer value. This value is used when retransmitting
+								Database Description and Link State Request packets. The default
+								value is 5 seconds.</span></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd">T<span
+							style="color: rgb(0, 0, 0);">ransmit Delay</span></td>
+						<td colspan="1" class="confluenceTd"><span
+							style="color: rgb(0, 0, 0);">Set number of seconds for
+								InfTransDelay value. LSAs’ age should be incremented by this
+								value when transmitting. The default value is 1 seconds.</span></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd"><span
+							style="color: rgb(0, 0, 0);">Authentication</span></td>
+						<td colspan="1" class="confluenceTd">Dropdown with 2 options:
+							MD5 or Text Plain</td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd">Password</td>
+						<td colspan="1" class="confluenceTd">The password for OSPF
+							Area</td>
+					</tr>
+					<tr>
+						<td colspan="1" class="confluenceTd">Super-CIDR**</td>
+						<td colspan="1" class="confluenceTd">For using dynamic
+							routing a zone level super-cidr is required. This will be carved
+							into network sub levels and into the created routed tiers.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p> </p>
+		<h5 id="DynamicallyroutedVPC-**Super-CIDRs">**Super-CIDRs </h5>
+		<p>We need a super cidr that will be used to allocate cidrs to
+			tiers that will be part of dynamic routing. Initial implementation
+			will have this super-cidr available to all domains and accounts. The
+			ip addresses will be distributed as per RFC 3531.</p>
+		<p>Lets say user enters 200.200.0.0/16, this can be split into 256
+			subnets using /24. Which are 200.200.0.0/24 to 200.200.255.0/24. This
+			means a total of 256 VPCs can be created in one single zone. </p>
+		<p>Then each 200.200.100.0/24 will be further split into 8
+			network 200.200.100.0/27. This means that first /27 network is for
+			VPC and the next 7 for the VPC tiers.</p>
+		<p>Initial implementation will split the Super IPv4 CIDR to /24
+			networks and each /24 network will be split into /27 networks. If the
+			super IPv4 CIDR is not sufficiently big enough to split into network
+			sub levels then appropriate errors will be given to the user.</p>
+		<p>The last ip address of the VPC level super-cidr will be used as
+			the loopback id of the ospf enabled VPC-VR.</p>
+		<p>Some of the operators may want their users to have public IP
+			assigned to their VPC-VMs. To facilitate that management server will
+			allow both private and public class super-cidrs to be specified for
+			the zone. There will be provision to add more super-CIDRs of private
+			public kind at later stages.</p>
+		<p>The above super-cidr partitioning scheme is an example only.
+			The selection of super-CIDR and subsequent partitioning of it is user
+			driven. The admin is able to provide a super-cidr for the ospf
+			enabled zone. The users then further partitions it by specifying
+			netmast for their VPC and its tiers. As shown below:</p>
+		<p> </p>
+		<p>
+        <img src="img/ospf-use-case-v2.png">
+		</p>
+		<h3 id="DynamicallyroutedVPC-RoutedVPCNetworkOffering">Routed VPC
+			Network Offering</h3>
+		<p>There will be two default service offerings that will be
+			created for dynamically routed VPCs one corresponding to public class
+			ips and another corresponding to private class ips. These will be
+			&quot;DefaultPublicRoutedVPCNetworkOffering&quot; and
+			&quot;DefaultPrivateRoutedVPCNetworkOffering&quot; respectively.
+			Depending on what offering a user chooses cloudstack will assign ips
+			from the respective range to user's VPC or flag an error if no ips of
+			that particular class exists.</p>
+		<p>These offerings will show up with other default network
+			offerings. When a Routed VPC is created it will spin of the VPC-VR
+			with pre-configured ranges and quagga service running on it. This
+			will require that the system vm template have quagga installed on
+			them.</p>
+		<h3 id="DynamicallyroutedVPC-VR-templatechanges">VR-template
+			changes</h3>
+		<p>Quagga will be pre-installed on the VPC-VR template and will be
+			activated and configured if
+			Default&lt;Private/Public&gt;RoutedVPCNetworkOffering network
+			offering is used.  Quagga will advertise the VPC routing table across
+			to other VPC routers. </p>
+		<p>[ APPENDIX - Quagga configuration]</p>
+		<p>
+			<span>A md5 encoded password is used for inter quagga
+				communication.</span>
+		</p>
+		<p>
+			<span><strong>Creating Routed VPC</strong></span>
+		</p>
+		<p>In the network tab when VPC is selected then UI will show a
+			additional button to create routed VPCs as</p>
+		<p> </p>
+		<p>
+			<img src="img/create-vpc.png">
+		</p>
+		<p> </p>
+		<p>The user while creating a VPC can select
+			the Default&lt;Private/Public&gt;RoutedVPCNetworkOffering that will
+			enforce the Super IPv4 CIDR to be in the Super IPv4 CIDR of the zone.
+			If the user provides a netmask and the management server carves out a
+			equivalent ip range form the zone super cidr.. An appropriate error
+			will be given if the zone has exhausted all /24 CIDRs. [ Check
+			netmask to cidr translation table below ]</p>
+		<p> </p>
+		<p>
+			<span
+				class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img src="img/create-vpc-screen.png"></span>
+		</p>
+		<p> </p>
+		<h3 id="DynamicallyroutedVPC-CreatingroutedVPCtier">Creating
+			routed VPC tier</h3>
+		<p>When a VPC tier is created, the user shall configure an IPv4
+			CIDR and the IPv4 gateway. The tier IPv4 CIDR should be within the
+			super IPv4 CIDR configured for its VPC. In this case it would be /27
+			prefix. If the user does not configure any value, Cloudstack
+			automatically picks an unused /27 CIDR and assigns it to the VPC
+			tier. </p>
+		<p> </p>
+		<p>
+			<span><br /></span>
+		</p>
+		<p>
+			<img src="img/create-vpc-tier-screen.png">
+		</p>
+		<p> </p>
+		<p>In general for selecting CIDRs for the VPC user will enter the
+			netmask for his VPS and various tiers. Management server will verify
+			the mask and will look for a available range corresponding to that
+			mask. If a range is available MS will use that or else will flag an
+			error.</p>
+		<p> </p>
+		<p>The workflow for VPC creation will look as below:</p>
+		<p> </p>
+		<p>
+			<img src="img/vpc-flow.png">
+		</p>
+		<p>The Routed VPC creation and configuration will be similar to
+			the creation of a regular VPC, only that the Super CIDRs of various
+			tiers are carved from the zone's configured Super CIDR for
+			dynamically routed VPCs.</p>
+		<p> </p>
+		<div>
+			<h4 id="DynamicallyroutedVPC-DBSchemachanges">DB Schema changes</h4>
+			<p> </p>
+			<p>Following schema objects will be added to the MS schema:</p>
+			<p> </p>
+			<p>network_details:  The zone level dynamic routing parameters
+				for public network will be saved in network details table.</p>
+			<p>network_offering: the table will be modified and a new field
+				dynamic_routing will be added to it. </p>
+			<p>user_vm_details: for capturing priority of the OSPF router in
+				order to facilitate selection of designated router.</p>
+			<p> </p>
+			<h4 id="DynamicallyroutedVPC-QuaggaConfiguration">Quagga
+				Configuration</h4>
+			<p> </p>
+			<p>
+				<u>zebra.conf (minimal)</u>
+			</p>
+			<p>hostname r-6-VM</p>
+			<p>password zebra</p>
+			<p>enable password zebra</p>
+			<p>!</p>
+			<p>! Interface's description.</p>
+			<p>!</p>
+			<p>interface eth1</p>
+			<p>  description link to area 0</p>
+			<p>  ip address 192.168.100.68/24</p>
+			<p>  link-detect</p>
+			<p>!</p>
+			<p>log file /var/log/quagga/zebra.log</p>
+			<p>
+				<u><br /></u>
+			</p>
+			<p>
+				<u>ospf.conf (minimal)</u>
+			</p>
+			<p>
+				<u>#</u>
+			</p>
+			<p>hostname r-4-VM</p>
+			<p>password zebra</p>
+			<p>!enable password please-set-at-here</p>
+			<p>!</p>
+			<p>!</p>
+			<p>interface eth1</p>
+			<p>!</p>
+			<p>router ospf</p>
+			<p> ospf router-id 192.168.100.67</p>
+			<p> redistribute connected</p>
+			<p> no passive-interface eth1</p>
+			<p> network 192.168.100.0/24 area 0</p>
+			<p> network 200.200.1.0/24 area 67</p>
+			<p> network 200.200.2.0/24 area 67</p>
+			<p> </p>
+			<p>!</p>
+			<p>log file /var/log/quagga/ospfd.log</p>
+			<p>---</p>
+			<p>vtysh -c &quot;show ip ospf neighbor&quot;</p>
+			<p> </p>
+			<p>    Neighbor ID Pri State           Dead Time Address        
+				Interface            RXmtL RqstL DBsmL</p>
+			<p>192.168.100.68    1 Full/DR           34.090s 192.168.100.68 
+				eth1:192.168.100.67      0     0     0</p>
+			<p> </p>
+			<p>---</p>
+			<p>
+				<u>Sample command output:</u>
+			</p>
+			<p> </p>
+			<p>vtysh -c &quot;show ip ospf route&quot;</p>
+			<p>============ OSPF network routing table ============</p>
+			<p>N    200.200.1.0/24         [10] area: 0.0.0.67</p>
+			<p>                           directly attached to eth2</p>
+			<p>N    200.200.2.0/24         [10] area: 0.0.0.67</p>
+			<p>                           directly attached to eth3</p>
+			<p>N IA 200.200.5.0/24         [20] area: 0.0.0.0</p>
+			<p>                           via 192.168.100.68, eth1</p>
+			<p>N IA 200.200.6.0/24         [20] area: 0.0.0.0</p>
+			<p>                           via 192.168.100.68, eth1</p>
+			<p>N    200.200.100.0/24      [10] area: 0.0.0.0</p>
+			<p>                           directly attached to eth1</p>
+			<p> </p>
+			<p>============ OSPF router routing table =============</p>
+			<p>R    192.168.100.68        [10] area: 0.0.0.0, ABR, ASBR</p>
+			<p>                           via 192.168.100.68, eth1</p>
+			<p> </p>
+			<p>============ OSPF external routing table ===========</p>
+			<p> </p>
+			<p> </p>
+			<p>Netmask /CIDR translation table:</p>
+			<p> </p>
+			<pre> Netmask         Binary                  CIDR    Notes
+
+    255.255.255.255     11111111.11111111.11111111.11111111 /32 1   useable
+    255.255.255.254     11111111.11111111.11111111.11111110 /31 0   useable
+    255.255.255.252     11111111.11111111.11111111.11111100 /30 2   useable
+    255.255.255.248     11111111.11111111.11111111.11111000 /29 6   useable
+    255.255.255.240     11111111.11111111.11111111.11110000 /28 14  useable
+    255.255.255.224     11111111.11111111.11111111.11100000 /27 30  useable
+    255.255.255.192     11111111.11111111.11111111.11000000 /26 62  useable
+    255.255.255.128     11111111.11111111.11111111.10000000     /25 126 useable
+
+    255.255.255.0       11111111.11111111.11111111.00000000 /24 class C
+
+    255.255.254.0       11111111.11111111.11111110.00000000 /23
+    255.255.252.0       11111111.11111111.11111100.00000000 /22
+    255.255.248.0       11111111.11111111.11111000.00000000 /21
+    255.255.240.0       11111111.11111111.11110000.00000000 /20
+    255.255.224.0       11111111.11111111.11100000.00000000 /19
+    255.255.192.0       11111111.11111111.11000000.00000000 /18
+    255.255.128.0       11111111.11111111.10000000.00000000 /17
+    255.255.0.0     11111111.11111111.00000000.00000000 /16 class B
+
+    255.254.0.0     11111111.11111110.00000000.00000000 /15
+    255.252.0.0     11111111.11111100.00000000.00000000 /14
+    255.248.0.0     11111111.11111000.00000000.00000000 /13
+    255.240.0.0     11111111.11110000.00000000.00000000 /12
+    255.224.0.0     11111111.11100000.00000000.00000000 /11
+    255.192.0.0     11111111.11000000.00000000.00000000 /10
+    255.128.0.0     11111111.10000000.00000000.00000000 /9
+    255.0.0.0       11111111.00000000.00000000.00000000 /8  class A
+
+    254.0.0.0       11111110.00000000.00000000.00000000 /7
+    252.0.0.0       11111100.00000000.00000000.00000000 /6
+    248.0.0.0       11111000.00000000.00000000.00000000 /5
+    240.0.0.0       11110000.00000000.00000000.00000000 /4
+    224.0.0.0       11100000.00000000.00000000.00000000 /3
+    192.0.0.0       11000000.00000000.00000000.00000000 /2
+    128.0.0.0       10000000.00000000.00000000.00000000 /1
+    0.0.0.0         00000000.00000000.00000000.00000000 /0</pre>
+		</div>
+
+
+*Reproduced by Abhinandan Prateek from https://cwiki.apache.org/confluence/display/CLOUDSTACK/Dynamically+routed+VPC
+
+	</div>
+
+	</main>
+	<!-- ===============================================-->
+	<!--    End of Main Content-->
+	<!-- ===============================================-->
+
+	<br />
+	<br />
+
+	<!-- ================ start footer Area ================= -->
+	<footer class="bg-dark footer-area section-gap">
+		<div class="container">
+			<div
+				class="footer-bottom row align-items-center text-center text-lg-left">
+				<p class="footer-text text-info m-0 col-lg-4 col-md-12">
+					ibeyonde copyright &copy;2021</p>
+
+				<div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+					<a href="terms&conditions.html">Terms</a>&emsp;& &emsp; <a
+						href="privacy_policy.html">Privacy</a>
+				</div>
+				<div
+					class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+					<a href="https://twitter.com/agneya2001"><i
+						class="ti-twitter-alt"></i></a>
+					<a href="https://fb.me/ibeyonde"><i
+						class="ti-facebook"></i></a>
+					<a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"
+						style="color: white; font-size: 1.2rem;"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- ================ End footer Area ================= -->
+
+	<!-- ===============================================-->
+	<!--    JavaScripts-->
+	<!-- ===============================================-->
+	<!-- JavaScript and dependencies -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+		integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+		crossorigin="anonymous"></script>
+	<script src="assets/js/plugins.js"></script>
+	<script src="assets/lib/is/is.min.js"></script>
+	<script src="assets/lib/stickyfilljs/stickyfill.min.js"></script>
+	<script src="assets/js/theme.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Howto configure raspberry pi serial ports</title>
+<meta name="description" content="Raspberry Pi is capable of doing serial communication using the GPIO pins 14 and 15. Setting Raspberry Pi Serial Ports is expected to be simple and straightforward.">
+<meta property="og:description" content="Raspberry Pi is capable of doing serial communication using the GPIO pins 14 and 15. Setting Raspberry Pi Serial Ports is expected to be simple and straightforward.">
+<meta property="og:type" content="website" />
+<meta name="og:title" property="og:title" content="Howto configure raspberry pi serial ports">     
+<meta property="og:image" content="https://ibeyonde.com/img/Raspberry-pi-UART-pins.png" /> 
+
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" href="/img/favicon.ico" type="image/png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <link rel="stylesheet" href="assets/themify-icons/themify-icons.css">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300&amp;display=swap" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+    
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173989963-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-173989963-1');
+</script>
+
+  </head>
+
+<body>
+ 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 pl-0">
+        <div class="container"><a class="navbar-brand text-info font-weight-bold" href="index.html"> ibeyonde </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item text-muted"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="iot-hardware-india">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="iaas-cloud-ai-ml-india">Services</a></li>
+              <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#aboutus">AboutUs</a></li>
+            </ul><!--  <a class="btn btn-primary ml-auto hover-top-shadow" href="#!">Buy now</a>-->
+          </div>
+        </div>
+      </nav>
+
+
+  <!--================ Hero sm Banner start =================-->      
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding: 1vh; box-shadow: 2px 2px 10px lightblue;text-align: center;">
+                <img src="img/Raspberry-pi-UART-pins.png"  width="100%">
+            </div>
+            <div class="col-md-8" style="padding-top: 4vh; box-shadow: 2px 2px 10px lavenderblush;text-align: center;">
+              <div class="hero-banner--sm__content">
+               <h1 style="color: #d73364;">IoT: Howto configure raspberry pi serial ports</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Raspberry Pi serial ports</li>
+                  </ol>
+                </nav>
+              </div>
+         </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->
+
+<div class="container">
+
+<br/>
+<br/>
+<br/>
+
+<h2>Introduction</h2>
+<br/>
+
+Raspberry Pi is capable of doing serial communication using the <a href="raspberry-pi-serial-ports">GPIO pins 14 and 15</a>. 
+Setting Raspberry Pi Serial Ports is expected to be simple and straightforward. Instead, it is confusing because online instructions are not very clear on the issues 
+that one encounters when using different Raspberry Pi models. Following article is an attempt to set up the serial communication from your Raspberry Pi. 
+To make it crystal clear, here we are talking about the physical serial pins 8, TxD, also referred to as BCM 14 and physical pin 9, RxD also referred to as BCM 15.
+
+Another vital thing to note here is that these serial pins work at 0-3.3 Volts. While connecting it to external devices ensure that they also are 0-3.3V devices. 
+Note that TxD or Raspberry pi connects to RxD of the external device and similarly for the other pins. These pins collectively are also known as 
+UART(Universal Asynchronous Receiver/Transmitter) pins.
+<br/>
+<br/>
+<h2>Raspberry Pi UART</h2>
+<br/>
+Raspberry Pi has two in-built UART, which are as follows:
+<ul>
+    <li><strong>PL011 UART</strong></li>
+    <li><strong>mini UART</strong></li>
+</ul>
+<strong>PL011</strong> UART is an ARM-based UART. This UART has better throughput than <strong>mini</strong> UART.
+
+In older versions of Raspberry Pi, the ones that do not have onboard wifi and Bluetooth module, the PL011 UART was allocated to BCM 14 and 15.
+
+<img class="size-medium wp-image-2738" src="img/Raspberry-pi-UART-pins.png" alt="IoT India, Raspberry pi UART pins" width="300" height="188" /> Raspberry pi UART pins
+
+In the newer version of Raspberry Pi's the PL011 is connected to the On-board Bluetooth module. By default, Mini UART is available but linked to the core frequency of GPU. 
+This dependency on GPU frequency makes mini UART on newer pi's unstable for most serial applications. The PL011 is a stable and high-performance UART. 
+For better and effective communication use PL011 UART instead of mini UART.
+<br/>
+<br/>
+<h2>Configure UART on Raspberry Pi</h2>
+<br/>
+In the section below, we will look at how to configure and use UART ports effectively for both the older and newer versions of Raspberry Pi.
+<br/>
+<br/>
+<h3>Older version of Raspberry Pi</h3>
+<br/>
+Following instructions are for Raspberry Pis that do not have onboard Bluetooth module and PL011 UART module is assigned to the BCM pins 14 and 15.
+<br/>
+<br/>
+<h4>Step 1. Enable kernel UART</h4>
+<br/>
+Login into the Raspberry Pi and on console edit /boot/config.txt. Look for "enable_uart" configuration. If present change it, if not add it, so that you have following entry in your /boot/config.txt:
+
+[su_highlight background="#fdfbc7"]enable_uart=1[/su_highlight]
+
+Step 2. Edit the file cmdline.txt.
+
+By default it contains the following:
+
+[su_highlight background="#fdfbc7"]dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait[/su_highlight]
+
+Change the value of console so that it looks like below:
+
+[su_highlight background="#fdfbc7"]dwc_otg.lpm_enable=0 console=/dev/ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait[/su_highlight]
+
+This entry 'console=/dev/ttyAMA0,115200' is only needed if you are connecting a device to access linux console. In case you are connecting it another serial device then completly remove this entry. In case of a serial device also disable the serial console related linux processes:
+&npsp;
+<pre>
+$ sudo systemctl stop serial-getty@ttyAMA0.service
+$ sudo systemctl disable serial-getty@ttyAMA0.service
+</pre>
+&npsp;
+<br/>
+<br/>
+<h4>Step 3. Reboot</h4>
+<br/>
+Aftre a reboot changes take effect and  your serial ports are set to communicate with other serial devices.
+<br/>
+<br/>
+<h3>Raspberry pi with the onboard Bluetooth module</h3>
+<br/>
+Following instructions are for Raspberry Pi's that have in-built Bluetooth module using the physical PL011 UART.
+<br/>
+<br/>
+<h4>Step 1: Disable use of Pl011 UART by Bluetooth module</h4>
+<br/>
+Login into the Raspberry Pi and on console edit /boot/config.txt. Look for "dtoverlay=pi3-disable-bt" configuration. If present change it, if not add it, so that you have following entry in your /boot/config.txt:
+
+[su_highlight background="#fdfbc7"]dtoverlay=pi3-miniuart-bt [/su_highlight]
+
+This step will force the Bluetooth module to use mini UART, and thus become slightly unstable.
+
+Also, disable the system services that use the UART module:
+
+[su_highlight background="#fdfbc7"]sudo systemctl disable hciuart [/su_highlight]
+
+&nbsp;
+<br/>
+<br/>
+<h4>Step 2:</h4>
+<h4>Edit the file cmdline.txt.</h4>
+<br/>
+By default it contains the following:
+
+[su_highlight background="#fdfbc7"]dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait[/su_highlight]
+
+Change the value of console so that it looks like below:
+
+[su_highlight background="#fdfbc7"]dwc_otg.lpm_enable=0 console=/dev/ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait[/su_highlight]
+
+Note that 115200 is the frequency at which the serial communication will happen. Check if this is compatible with the device you are planning to connect.
+
+&nbsp;
+<br/>
+<br/>
+<h4>Step 3. Reboot</h4>
+After a reboot changes take effect and your serial ports are set to communicate with other serial devices.
+<h3></h3>
+<br/>
+<h3>Using serial communication using Raspberry Pi Serial Ports</h3>
+&nbsp;
+
+<img class="img-fluid" src="img/y3gBgyxrCMNQJne5.jpeg" alt="IoT India, OpenEVSE FTDI Port" width="408"  /> OpenEVSE FTDI Port
+
+<img class="img-fluid" src="img/OpenEVSE-FTDI-to-Raspberry-Pi-Serial-Port.jpg" alt="Iot India, OpenEVSE FTDI to Raspberry Pi Serial Port" width="400"/> 
+OpenEVSE FTDI to Raspberry Pi Serial Port
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+<span style="font-size: 16px;">In our case, we intended to connect Raspberry pi to </span><a style="font-size: 16px;" href="https://www.openevse.com">OpenEvse</a>
+<span style="font-size: 16px;"> electric vehicle charger on its <a href="ocpp-compliant-evse">serial port</a>. 
+The module that speaks UART is shown on the left while the right figure shows the connection via a level shifter to Raspberry Pi.</span>
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+We are reproducing some python code here that is generic and can help you troubleshoot your serial connection.
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+<h3>Python code to read from the serial port (read.py):</h3>
+&nbsp;
+<pre>#!/usr/bin/env python
+          
+
+import time
+import serial
+
+
+ser = serial.Serial(
+    port='/dev/ttyAMA0',
+    baudrate = 115200,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS,
+    timeout=3
+)
+
+
+while 1:
+    x=ser.readline()
+    if len(x)&gt;1:
+       print x
+    time.sleep(2)
+
+</pre>
+<h3>Python code to write to the serial port(write.py):</h3>
+&nbsp;
+<pre>#!/usr/bin/env python
+
+
+import time
+import serial
+
+
+ser = serial.Serial(
+    port='/dev/ttyAMA0',
+    baudrate = 115200,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS,
+    timeout=5
+)
+
+
+while 1:
+    var = raw_input("&gt;&gt;: ")
+    print "you entered", var.strip()
+    ser.write("%s\r"%var)
+    time.sleep(2)
+
+</pre>
+
+For more information do get in <a href="index.html#contact">touch.</a>
+  </div>
+
+
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<br/>
+<br/>
+
+  <!-- ================ start footer Area ================= -->
+    <footer class="bg-dark footer-area section-gap">
+         <div class="container">
+            <div class="footer-bottom row align-items-center text-center text-lg-left">
+                <p class="footer-text text-info m-0 col-lg-4 col-md-12">
+                ibeyonde copyright &copy;2021
+                </p>
+                
+                <div class="col-lg-4 col-md-12 text-center text-info text-lg-left">
+                    <a href="terms&conditions.html">Terms</a>&emsp;& &emsp;
+                    <a href="privacy_policy.html">Privacy</a>
+                </div>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="https://twitter.com/agneya2001"><i class="icon-box ti-twitter-alt"></i></a>
+                    <a href="https://fb.me/ibeyonde"><i class="icon-box ti-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/ibeyonde-cloud/"><i class="icon-box ti-linkedin"></i></a>
+                    <a href="https://github.com/gitibeyonde"><i class="icon-box ti-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- ================ End footer Area ================= -->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <!-- JavaScript and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>
