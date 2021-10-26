@@ -120,17 +120,17 @@ The project started with building a <a href="/raspberry-pi-security-camera.html"
 <ul>
 <li>The price point is crucial for Indian customers.</li>
 <li>There are some features like night vision that are important.</li>
-<li>Installation services if included are an added bonus.</li>
+<li>Installation services, if included, are a bonus.</li>
 <li>SD cards have limited life when storing live data 24x7.</li>
 </ul>
 Given the learning and the arrival of the esp32 camera module, we decided to do another round of improvements to cater to the Indian customers. 
 Creating a doorbell camera that can replace the existing electrical doorbell seemed like a good entry point into the home automation market. 
-The smart cloud doorbell is the result of this effort. At this point, we will focus on the electronics and the software. 
+The smart cloud doorbell is the result of this effort. At this point, our focus is on electronics and software.
 The aesthetic design will be done when we find an excellent partner to take this forward.
 </p>
 <p>
-The doorbell camera conforms to the expected functionality.
-The bell button press on the smart doorbell camera will send a Push Notification to the mobile App, either Android or iOS; usually, it hits the phone within 2 seconds.
+The doorbell camera conforms to the expected functionality. In cloud mode it is constantly checking for motion and uploads snapshots when motion is detected.
+The bell button-press on the smart doorbell camera sends a Push Notification to the mobile App, either Android or iOS; usually, it hits the phone within 2 seconds.
 Clicking the push notification will open the live video and motion history view in the respective mobile App.
 Motion history lets you know who pressed the bell even if they have moved away. 
 The live view gives you the current video feed from the bell with very low latency.
@@ -171,6 +171,11 @@ The bell video feed and history can be accessed from any browser or mobile apps.
 <p>The bell is low-cost and comes with high-quality software and hardware. It is built keeping Indian customers in mind. 
 It comes with night-vision and a relay to drive one external doorbell.
 It can also ring other Ibeyonde ringers residing on the network using UDP broadcast of bell ring on the local network.
+</p>
+<p>
+The cloud cameras are fully accessible from all the popular browsers from desktops and laptops. In addition there are Android and iOS Apps.
+Firebase is configured to send puch notifications to the mobile Apps. 
+The initial configuration is done via bluetooth; on reset it reverts to the same.
 </p>
 <p>
 At the backend, resides a pipeline of AI/ML technologies. These are object detection, including faces and dangerous objects, object counting and license plate number recognition. 
@@ -216,6 +221,8 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </td>
 </tr>
 </table>
+The image framesize and quality is optimized for the current network speed in India. 
+There is a choice of increasing framesize if the network permits the smooth transmision.
 <br/>
 <br/>
 <br/>
