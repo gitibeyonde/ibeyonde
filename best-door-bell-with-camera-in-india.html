@@ -122,6 +122,7 @@ The project started with building a <a href="/raspberry-pi-security-camera.html"
 <li>There are some features like night vision that are important.</li>
 <li>Installation services, if included, are a bonus.</li>
 <li>SD cards have limited life when storing live data 24x7.</li>
+<li>You cannot ignore chinese products.</li>
 </ul>
 Given the learning and the arrival of the esp32 camera module, we decided to do another round of improvements to cater to the Indian customers. 
 Creating a doorbell camera that can replace the existing electrical doorbell seemed like a good entry point into the home automation market. 
@@ -150,7 +151,7 @@ The bell video feed and history can be accessed from any browser or mobile apps.
 <img src="/img/electrical-doorbell.jpg" alt="electrical doorbell india" width="200px">
 </td>
 <td>
-<img src="/img/best-door-bell-with-camera-india.jpeg" alt="electrical doorbell with camera india" width="100px">
+<img src="/img/best-door-bell-with-camera-india.jpeg" alt="electrical doorbell with camera india" width="150px">
 </td>
 </tr>
 <tr>
@@ -174,13 +175,14 @@ It can also ring other Ibeyonde ringers residing on the network using UDP broadc
 </p>
 <p>
 The cloud cameras are fully accessible from all the popular browsers from desktops and laptops. In addition there are Android and iOS Apps.
-Firebase is configured to send puch notifications to the mobile Apps. 
+Firebase is configured to send push notifications to the mobile Apps. 
 The initial configuration is done via bluetooth; on reset it reverts to the same.
 </p>
 <p>
 At the backend, resides a pipeline of AI/ML technologies. These are object detection, including faces and dangerous objects, object counting and license plate number recognition. 
-Face recognition can then be enabled and configured using a process of naming detected faces. The bell API lets you request the visual data from the bell on demand.
-This enables cloud APIs that lets you query bell for detected objects, count, and scenarios in real time.
+Face recognition can then be enabled and configured using a process of naming detected faces. These were inherited from the cloud camera. 
+The camera API lets you request the visual data from the bell camera on demand.
+This enables cloud API that lets you query camera for detected objects, count, and scenarios in real time.
 This drastically reduces the networking and storage costs.
 </p>
 <p>
@@ -202,28 +204,57 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 <br/>
 <small><b>Video quality</b></small>
 <br/>
+<br/>
+<p>IR cameras used in the door bell are tuned for wider range of frequencies in order to provide vision in low or no light conditions.
+</p>
+<br/>
 <table width="80%">
 <tr>
 <td>
-<img src="/img/regular-camera.jpg" alt="regular camera" width="320px">
+<img src="/img/wide-angle-camera-with-infrared-senstivity.jpg" alt="wide-angle-camera-with-infrared-senstivity" width="320px">
 </td>
 <td>
-<img src="/img/wide-angle-camera-with-infrared-senstivity.jpg" alt="wide-angle-camera-with-infrared-senstivity" width="320px">
+<img src="/img/camera-ir-picture.jpg" alt="regular camera" width="320px">
+</td>
+<td>
+<img src="/img/camera-room-light-picture.jpg" alt="regular camera" width="320px">
 </td>
 </tr>
 <tr>
 <td>
-<i>A regular camera</i>
+<i>wide-angle doorbell camera</i>
 </td>
 <td>
-<i>The ibeyonde smart cloud camera<br/> 
- that is IR sensitive.</i>
+<i>night view</i>
+</td>
+<td>
+<i>lit room view</i>
+</td>
+</tr>
+<tr>
+<td>
+<img src="/img/regular-camera-daytime.jpg" alt="wide-angle-camera-with-infrared-senstivity" width="320px">
+</td>
+<td>
+<img src="/img/regular-camera-night.jpg" alt="regular camera" width="320px">
+</td>
+<td>
+<img src="/img/regular-camera-lit-room.jpg" alt="regular camera" width="320px">
+</td>
+</tr>
+<tr>
+<td>
+<i>regular camera</i>
+</td>
+<td>
+<i>night view</i>
+</td>
+<td>
+<i>lit room view</i>
 </td>
 </tr>
 </table>
-The image framesize and quality is optimized for the current network speed in India. 
-There is a choice of increasing framesize if the network permits the smooth transmision.
-<br/>
+The image framesize and quality are optimized for the current network speed in India.<br/>
 <br/>
 <br/>
 <br/>
